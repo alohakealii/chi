@@ -1,0 +1,57 @@
+
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="UTF-8">
+    <title>Select List Input</title>
+</head>
+
+<body>
+    <form action="login.php"
+          method="post">
+        <fieldset>
+            <legend>Login Form</legend>
+
+            <p>
+                <label>Username:</label>
+                <input name="uName" type="text" />
+            </p>
+            
+            <p>
+                   <label>What time of day is it?</label> <!-- Greet user accordingly -->
+                   <select name="tome">
+                       <option value="morning" selected>Morning</option>
+                       <option value="afternoon">Afternoon</option>
+                       <option value="night">Night</option>
+                   </select>
+            </p>
+
+            <p>
+                <label>Do you prefer first or last name?</label> <!-- Greet using first/last name -->
+                <input type="radio"
+                       name="name"
+                       value="first"
+                       checked /> First
+                <input type="radio"
+                       name="name"
+                       value="last" /> Last
+            </p>
+            
+            <p>
+                <label>Actions to take: </label> 
+                <input type="checkbox"
+                       name="return"
+                       value="return" /> Return my name <!-- Return first & last name -->
+                <input type="checkbox"
+                       name="logout"
+                       value="logout" /> Log out afterwards <!-- Append logout message -->
+            </p>
+
+            <p>
+                <input type="submit" value="Submit" />
+            </p>
+        </fieldset>
+    </form>
+</body>
+</html>
+
