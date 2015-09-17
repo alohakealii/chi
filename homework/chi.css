@@ -1,1 +1,41 @@
-//CSS!
+/* CSS! */
+
+body {
+	font-family: sans-serif;
+}
+
+/* start nav bar */
+nav ul {
+    width: 80%;
+    display:table;
+    margin: 1em auto;
+    padding:0;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+nav li {
+    display: table-cell;
+    width: 10%;
+    text-align: center;
+}
+
+/*
+@media (max-width:406px) {
+    nav li {
+        width:0;
+    }
+}
+*/
+
+nav li a {
+    display: block;
+    padding: 0.5em 0;
+    background-color: gainsboro;
+}
+
+/* end nav bar */
+
+
