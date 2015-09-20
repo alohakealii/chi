@@ -1,7 +1,8 @@
 /* CSS! */
 
 body {
-	font-family: sans-serif;
+    font-family: sans-serif;
+    background-image: url("IehB7.png");
 }
 
 /* start nav bar */
@@ -38,4 +39,42 @@ nav li a {
 
 /* end nav bar */
 
+/* main element */
 
+main {
+    position: absolute;
+    width: 58%;
+    left: 11%;
+    background-color: white;
+    border-radius: 3px;
+    padding: 5px;
+    min-height: 450px;
+}
+
+/* end main */
+
+/* sidebar */
+
+sidebar {
+    position: absolute;
+    width: 18%;
+    right: 11%;
+    background-color: red;
+    border-radius: 3px;
+    padding: 5px;
+    min-height: 450px;
+}
+
+sidebar img {
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+sidebar p {
+    color: white;
+}
+
+/* end sidebar */

@@ -1,47 +1,53 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Chi</title>
-        <link rel="stylesheet" href="chi.css">
+<head>
+    <title>Chi</title>
+    <link rel="stylesheet" href="chi.css">
 
-    </head>
-    <body>
+</head>
+<body>
 
-    <nav>
-        <ul>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-            <li><a href="#">Link</a></li>
-        </ul>
-    </nav>
+<nav>
+    <ul>
+        <li><a href="http://cs.sjsu.edu/~mak/CS174/index.html">Course Page</a></li>
+        <li><a href="http://cs.sjsu.edu/~mak/CS174/assignments/2/Assignment2.pdf">Assignment 2</a></li>
+        <li><a href="https://www.google.com/?gws_rd=ssl">Google</a></li>
+        <li><a href="http://www.w3schools.com/">w3schools</a></li>
+    </ul>
+</nav>
 
+<main>
+    <form action="verify.php" method="post">
+        <p>
+            <label>First name:</label>
+            <input name="first" type="text" value="anne"/>
+        </p>
+        <p>
+            <label>Last name:</label>
+            <input name="last" type="text" value="beltran"/>
+        </p>
+        <p>
+            Gender:
+            <select name="gender">
+                <option value="both">Select</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+            </select>
+        </p>
+        <p>
+            Age:
+            <input type="radio" name="ageControl" value=">"/> Greater than
+            <input type="radio" name="ageControl" value="<"/> Less than
+            <input name="age" type="text"/>
+        </p>
+        <input type="submit" value="Submit" />
+    </form>
+</main>
 
-        <form action="verify.php" method="post">
-            <p>
-                <label>First name:</label>
-                <input name="first" type="text" value="anne"/>
-            </p>
-            <p>
-                <label>Last name:</label>
-                <input name="last" type="text" value="beltran"/>
-            </p>
-            <p>
-                Gender:
-                <select name="gender">
-                    <option value="both">Select</option>
-                    <option value="male">Male</option>
-                    <option value="female">Female</option>
-                </select>
-            </p>
-            <p>
-                Age:
-                <input type="radio" name="ageControl" value=">"/> Greater than
-                <input type="radio" name="ageControl" value="<"/> Less than
-                <input name="age" type="text"/>
-            </p>
-            <input type="submit" value="Submit" />
-        </form>
+<sidebar>
+    <img src="http://www.roflcat.com/images/cats/Cats_funny_costume.jpg" />
+    <p> This is one rockin cat!</p>
+</sidebar>
 
-    </body>
+</body>
 </html>
