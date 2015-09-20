@@ -7,10 +7,11 @@ body {
 
 /* start nav bar */
 nav ul {
-    width: 90%;
-    display: table;
+    width: 80%;
+    display:table;
     margin: 1em auto;
     padding:0;
+    border-radius: 3px;
 }
 
 nav a {
@@ -21,6 +22,13 @@ nav li {
     display: table-cell;
     width: 10%;
     text-align: center;
+
+    background-color: Gainsboro;
+    border-color: black;
+    border-width: 1.5px;
+    border-style: solid;
+    border-radius: 3px;
+    
 }
 
 /*
@@ -34,7 +42,6 @@ nav li {
 nav li a {
     display: block;
     padding: 0.5em 0;
-    background-color: gainsboro;
 }
 
 /* end nav bar */
@@ -42,32 +49,36 @@ nav li a {
 /* main element */
 
 main {
-    position: absolute;
-    width: 65%;
-    left: 5%;
-    top: 65px;
-    bottom: 100px;
-    background-color: white;
-    border-radius: 3px;
+    position: relative;
+    width: 58%;
+    left: 10%;
+
+    margin-bottom: 1em;
     padding: 5px;
+
+    min-height: 450px;
+    
+    border-radius: 3px;
+    background-color: white;
 }
 
 /* end main */
 
 /* sidebar */
 
-rightbar {
+sidebar {
     position: absolute;
-    width: 20%;
-    right: 5%;
-    top:65px;
-    bottom: 100px;
-    background-color: LightGray;
-    border-radius: 3px;
+    width: 18.5%;
+    left: 70%;
+    
+    margin-bottom: 3em;
     padding: 5px;
+    
+    border-radius: 3px;
+    background-color: LightGray;
 }
 
-rightbar p {
+sidebar p {
     color: white;
 }
 
@@ -76,12 +87,11 @@ rightbar p {
 /* footer */
 
 footer {
-    position: absolute;
-    bottom: 2%;
-    left: 5%;
-    margin: auto;
-    width: 90%;
-    text-align: center;
     background-color: LightGray;
-    border-radius:3px;
+    border-radius: 3px;
+    position:relative;
+    margin-left: 10%;
+    text-align: center;
+    width:80%;
+    padding: 1px;
 }

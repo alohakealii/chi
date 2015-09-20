@@ -3,6 +3,7 @@
 <head>
     <title>Chi</title>
     <link rel="stylesheet" href="chi.css">
+
 </head>
 <body>
 
@@ -14,6 +15,16 @@
         <li><a href="http://www.w3schools.com/">w3schools</a></li>
     </ul>
 </nav>
+
+<sidebar>
+    <p><a href="#">Home</a></p>
+    <p><a href="#">My Profile</a></p>
+    <p><a href="#">Check In</a></p>
+    <p><a href="#">Locations</a></p>
+    <p><a href="#">Search</a></p>
+    <p><a href="#">User Directory</a></p>
+    <p><a href="#">Site map</a></p>
+</sidebar>
 
 <main>
 <?php
@@ -102,10 +113,9 @@ try {
 ?>
 </main>
 
-<sidebar>
-    <img src="http://www.roflcat.com/images/cats/Cats_funny_costume.jpg" />
-    <p> This is one rockin cat!</p>
-</sidebar>
+<footer>
+    <p>Site is (c) Chi Team 2015</p>    
+</footer>
 
 </body>
 </html>
