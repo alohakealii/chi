@@ -1,10 +1,113 @@
-/* CSS! Here is some example CSS stuff */
-
+/* CSS Stuff! */
 body {
-    background-color: DimGray;
-}
-
-p {
     font-family: sans-serif;
+    background-image: url("IehB7.png");
 }
 
+/* start nav bar */
+nav ul {
+    width: 80%;
+    display:table;
+    margin: 1em auto;
+    padding:0;
+    border-radius: 3px;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+nav li {
+    display: table-cell;
+    width: 10%;
+    text-align: center;
+
+    background-color: Gainsboro;
+    border-radius: 3px;
+    
+    border-style: solid;
+    border-color: black;
+    border-width: 1.5px;    
+}
+
+/*
+@media (max-width:406px) {
+    nav li {
+        width:0;
+    }
+}
+*/
+
+nav li a {
+    display: block;
+    padding: 0.5em 0;
+}
+
+/* end nav bar */
+
+/* main element */
+
+main {
+    position: relative;
+    width: 58%;
+    left: 10%;
+
+    margin-bottom: 1em;
+    padding: 5px;
+
+    min-height: 450px;
+    
+    border-radius: 3px;
+    background-color: white;
+}
+
+/* end main */
+
+/* sidebar */
+
+sidebar {
+    position: absolute;
+    width: 18.2%;
+    left: 70%;
+    
+    margin-bottom: 3em;
+    padding: 5px;
+    
+    border-radius: 3px;
+    background-color: LightGray;
+}
+
+sidebar img {
+    max-height: 100%;
+    max-width: 100%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+sidebar p {
+    color: white;
+}
+
+/* end sidebar */
+
+/* footer */
+
+footer {
+    margin-left: 10%;
+    width:80%;
+    
+    padding: 1px;
+    position: relative;
+
+    background-color: LightGray;
+    border-radius: 3px;
+
+    border-style: solid;
+    border-color: black;
+    border-width: 1.5px;
+
+    text-align: center;
+}
+
+/* End footer */

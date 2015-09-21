@@ -1,3 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chi</title>
+    <link rel="stylesheet" href="chi.css">
+
+</head>
+<body>
+
+<nav>
+    <ul>
+        <li><a href="http://cs.sjsu.edu/~mak/CS174/index.html">Course Page</a></li>
+        <li><a href="http://cs.sjsu.edu/~mak/CS174/assignments/2/Assignment2.pdf">Assignment 2</a></li>
+        <li><a href="https://www.google.com/?gws_rd=ssl">Google</a></li>
+        <li><a href="http://www.w3schools.com/">w3schools</a></li>
+    </ul>
+</nav>
+
+<sidebar>
+    <p><a href="#">Home</a></p>
+    <p><a href="#">My Profile</a></p>
+    <p><a href="#">Check In</a></p>
+    <p><a href="#">Locations</a></p>
+    <p><a href="#">Search</a></p>
+    <p><a href="#">User Directory</a></p>
+    <p><a href="#">Site map</a></p>
+</sidebar>
+
+<main>
 <?php
 
 try {
@@ -78,7 +107,15 @@ try {
         echo $table;
     }
 } catch (PDOException $ex) {
-	echo 'ERROR: '.$ex->getMessage();
+    echo 'ERROR: '.$ex->getMessage();
 }
 
 ?>
+</main>
+
+<footer>
+    <p>Site is (c) Chi Team 2015</p>    
+</footer>
+
+</body>
+</html>
