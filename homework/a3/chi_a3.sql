@@ -16,6 +16,22 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `users` (
+  `userId` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(16) NOT NULL,
+  `password` varchar(16) NOT NULL,
+  PRIMARY KEY (`userId`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+
+--
 -- Table structure for table `availabilities`
 --
 
@@ -70,21 +86,6 @@ LOCK TABLES `profiles` WRITE;
 INSERT INTO `profiles` VALUES (1,'Frank','Ciotto',60,'male'),(2,'Karen','Armentrout',46,'female'),(3,'Joan','Webber',24,'female'),(4,'David','Drury',55,'male'),(5,'Betty','Smith',21,'female'),(6,'Brenda','Martinelli',29,'female'),(7,'Steven','Booth',33,'male'),(8,'Lisa','Saenz',34,'female'),(9,'Joan','Webber',24,'female'),(10,'Rose','Holmes',37,'female'),(11,'Margarer','Meddars',30,'female'),(12,'Val','Curry',37,'male');
 /*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
 UNLOCK TABLES;
-
---
--- Table structure for table `users`
---
-
-DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `users` (
-  `userId` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(16) NOT NULL,
-  `password` varchar(16) NOT NULL,
-  PRIMARY KEY (`userId`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
 --
 -- Dumping data for table `users`
