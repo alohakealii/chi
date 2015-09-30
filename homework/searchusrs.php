@@ -68,7 +68,7 @@
                 	$con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                 	$query = "SELECT firstName, lastName, day, startTime, endTime FROM availabilities
-                			  NATURAL JOIN profiles WHERE profiles.age < :age AND availabilities.startTime = :startTime";
+                			  NATURAL JOIN profiles WHERE profiles.age < :age AND availabilities.startTime >= :startTime";
 
                 	$ps = $con->prepare($query);
 

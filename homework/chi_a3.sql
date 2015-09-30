@@ -55,7 +55,30 @@ CREATE TABLE `availabilities` (
 
 LOCK TABLES `availabilities` WRITE;
 /*!40000 ALTER TABLE `availabilities` DISABLE KEYS */;
-INSERT INTO `availabilities` VALUES (1,'Monday',1,5),(1,'Tuesday',3,5),(2,'Tuesday',1,8),(2,'Wednesday',3,8),(3,'Monday',4,6),(3,'Wednesday',2,6),(4,'Thursday',3,5),(4,'Tuesday',3,5),(5,'Friday',4,8),(5,'Wednesday',2,3),(6,'Monday',7,9),(6,'Wednesday',1,3),(7,'Friday',1,3),(7,'Tuesday',5,9),(8,'Thursday',1,2),(8,'Wednesday',3,5),(9,'Thursday',1,3),(9,'Thursday',7,10),(10,'Friday',1,9),(10,'Monday',5,7),(11,'Monday',3,10),(11,'Tuesday',1,5),(12,'Tuesday',2,4),(12,'Wednesday',7,9);
+INSERT INTO `availabilities` VALUES (1,'Monday',1,5),
+                                    (1,'Tuesday',3,5),
+                                    (2,'Tuesday',1,8),
+                                    (2,'Wednesday',3,8),
+                                    (3,'Monday',4,6),
+                                    (3,'Wednesday',2,6),
+                                    (4,'Thursday',3,5),
+                                    (4,'Tuesday',3,5),
+                                    (5,'Friday',4,8),
+                                    (5,'Wednesday',2,3),
+                                    (6,'Monday',7,9),
+                                    (6,'Wednesday',1,3),
+                                    (7,'Friday',1,3),
+                                    (7,'Tuesday',5,9),
+                                    (8,'Thursday',1,2),
+                                    (8,'Wednesday',3,5),
+                                    (9,'Thursday',1,3),
+                                    (9,'Thursday',7,10),
+                                    (10,'Friday',1,9),
+                                    (10,'Monday',5,7),
+                                    (11,'Monday',3,10),
+                                    (11,'Tuesday',1,5),
+                                    (12,'Tuesday',2,4),
+                                    (12,'Wednesday',7,9);
 /*!40000 ALTER TABLE `availabilities` ENABLE KEYS */;
 UNLOCK TABLES;
 
