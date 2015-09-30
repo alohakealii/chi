@@ -36,8 +36,8 @@ try {
     $con->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     
     // declare variables from form
-    $first = $_POST['first'];
-    $last = $_POST['last'];
+    $firstName = $_POST['firstName'];
+    $lastName = $_POST['lastName'];
     $age = $_POST['age'];
     $gender = $_POST['gender'];
     if (isset($_POST['ageControl'])) { $ageControl = $_POST['ageControl']; }
@@ -45,14 +45,14 @@ try {
     // build query based on selected parameters
     $parameterCount = 0;
     $query = "SELECT * FROM profiles WHERE";
-    if ((strlen($first) > 0)) {
-        $query .= " first='$first'";
+    if ((strlen($firstName) > 0)) {
+        $query .= " firstName='$firstName'";
         $parameterCount++;
     }
 
-    if ((strlen($last) > 0)) {
+    if ((strlen($lastName) > 0)) {
         if ($parameterCount > 0) { $query .= " AND"; }
-        $query .= " last='$last'";
+        $query .= " lastName='$lastName'";
         $parameterCount++;
     }
 

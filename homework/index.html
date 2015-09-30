@@ -35,29 +35,60 @@
 
 <main>
     <form action="verify.php" method="post">
-        <p>
-            <label>First name:</label>
-            <input name="first" type="text" value="anne"/>
-        </p>
-        <p>
-            <label>Last name:</label>
-            <input name="last" type="text" value="beltran"/>
-        </p>
-        <p>
-            Gender:
-            <select name="gender">
-                <option value="both">Select</option>
-                <option value="male">Male</option>
-                <option value="female">Female</option>
-            </select>
-        </p>
-        <p>
-            Age:
-            <input type="radio" name="ageControl" value=">"/> Greater than
-            <input type="radio" name="ageControl" value="<"/> Less than
-            <input name="age" type="text"/>
-        </p>
-        <input type="submit" value="Submit" />
+        <fieldset>
+            <p>
+                <label>First name:</label>
+                <input name="firstName" type="text" value="Betty"/>
+            </p>
+            <p>
+                <label>Last name:</label>
+                <input name="lastName" type="text" value="Smith"/>
+            </p>
+            <p>
+                Gender:
+                <select name="gender">
+                    <option value="both">Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                </select>
+            </p>
+            <p>
+                Age:
+                <input type="radio" name="ageControl" value=">"/> Greater than
+                <input type="radio" name="ageControl" value="<"/> Less than
+                <input name="age" type="text"/>
+            </p>
+            <input type="submit" value="Submit" />
+        </fieldset>
+    </form>
+    <form action="avail.php" method="post">
+        <input type="submit" value="Check Availability"/>
+    </form>
+    <form action="lostusrnm.php" method="post">
+        <fieldset>
+            <p>
+                <label>First Name</label>
+                <input type="text" name="firstName" value="Betty"/>
+            </p>
+            <p>
+                <label>Last Name</label>
+                <input type="text" name="lastName" value="Smith"/>
+            </p>
+            <input type="submit" value="submit"/>
+        </fieldset>
+    </form>
+    <form action="searchusrs.php" method="post">
+        <fieldset>
+            <p>
+                <label>Age Less Than</label>
+                <input type="number" name="age" value="50"/>
+            </p>
+            <p>
+                <label>Available After</label>
+                <input type="number" name="startTime" value="3" min="1" max="24"/>
+            </p>
+        <input type="submit" value="submit"/>
+    </fieldset>
     </form>
 </main>
 
