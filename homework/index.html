@@ -4,6 +4,19 @@
     <title>Chi</title>
     <link rel="stylesheet" href="chi.css">
 
+
+    <script type="text/javascript">
+        function validateName() {
+            var firstName = document.getElementById("firstName").value;
+            var lastName = document.getElementById("lastName").value;
+
+            var nameRE = /^[a-zA-Z]+$/;
+            if (!firstName.match(nameRE) || !lastName.match(nameRE)) {
+                alert("Invalid search: letters only!");
+                return false;
+            }
+        }
+    </script>
 </head>
 <body>
 <header>
@@ -25,8 +38,8 @@
     Breaks the layout :(
     -->
     <p><a href="index.html">Home</a></p>
-    <p><a href="#">My Profile</a></p>
-    <p><a href="#">Check In</a></p>
+    <p><a href="cube.html">Animation</a></p>
+    <p><a href="draw.html">Draw</a></p>
     <p><a href="#">Locations</a></p>
     <p><a href="#">Search</a></p>
     <p><a href="#">User Directory</a></p>
@@ -64,17 +77,17 @@
     <form action="avail.php" method="post">
         <input type="submit" value="Check Availability"/>
     </form>
-    <form action="lostusrnm.php" method="post">
+    <form action="lostusrnm.php" method="post" onsubmit="return validateName()">
         <fieldset>
             <p>
                 <label>First Name</label>
-                <input type="text" name="firstName" value="Betty"/>
+                <input type="text" name="firstName" value="Betty" id="firstName"/>
             </p>
             <p>
                 <label>Last Name</label>
-                <input type="text" name="lastName" value="Smith"/>
+                <input type="text" name="lastName" value="Smith" id="lastName"/>
             </p>
-            <input type="submit" value="submit"/>
+            <input type="submit" value="submit" />
         </fieldset>
     </form>
     <form action="searchusrs.php" method="post">
