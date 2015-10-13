@@ -1,6 +1,6 @@
-//Assignment 5 for Jim Mildrew's CS 116A class, Fall 2014
-//Original code given by Jim Mildrew
-//Edited and completed by Qui Trinh
+// Assignment for Jim Mildrew's CS 116A class, Fall 2014
+// Partial code given by Jim Mildrew
+// Edited and completed by Qui Trinh
 
 
 

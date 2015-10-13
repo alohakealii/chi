@@ -1,3 +1,6 @@
+// Assignment for Jim Mildrew's CS 116A class, Fall 2014
+// Partial code given by Jim Mildrew
+// Edited and completed by Qui Trinh
 
 var vertexShaderCode = 
     'attribute vec4 a_Position; \n' +
