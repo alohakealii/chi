@@ -359,6 +359,7 @@ function doMoveDrag(event) {
 }
 
 function doMoveDone(event) {
+  rect = new RectShape(0, 0, 0, 0);
   mousePressed = false;
   moveOffsetX = moveOffsetY = 0;
   firstPoint = secondPoint = undefined;
