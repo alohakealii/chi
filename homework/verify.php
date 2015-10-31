@@ -2,7 +2,12 @@
 <html>
 <head>
     <title>Chi</title>
-    <link rel="stylesheet" href="chi.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/chi.css">
+
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/chi.js"></script>
 
 </head>
 <body>

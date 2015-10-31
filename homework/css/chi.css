@@ -1,11 +1,11 @@
 /* CSS Stuff! */
 body {
     font-family: sans-serif;
-    background-image: url("IehB7.png");
+    background-image: url("../images/IehB7.png");
 }
 /* start header */
 header{
-    background-image: url("dh2.jpg");
+    background-image: url("../images/dh2.jpg");
 }
 
 header p{
