@@ -2,6 +2,7 @@ $(init);
 
 function init() {
     $("#tabs").tabs();
+    $("#checkAvailability").button()
 }
 
 $("#sidebarContent").click(toggleSidebarFeline);
@@ -25,7 +26,6 @@ function validateName() {
 
 function toggleSidebarFeline() {
     var sidebar ='\
-        <p><input type="button" value="Toggle Sidebar Feline" onclick="toggleSidebarFeline()" /></p>\
         <p><a href="index.html">Home</a></p>\
         <p><a href="cube.html">Animation</a></p>\
         <p><a href="draw.html">Draw</a></p>\
@@ -34,7 +34,6 @@ function toggleSidebarFeline() {
         <p><a href="#">User Directory</a></p>\
         <p><a href="#">Site map</a></p>';
     var kitty = '\
-        <p><input type="button" value="Toggle Sidebar Feline" onclick="toggleSidebarFeline()" /></p>\
         <img src="http://www.roflcat.com/images/cats/Cats_funny_costume.jpg" />\
         <p> This is one rockin Metallicat!</p>';
 

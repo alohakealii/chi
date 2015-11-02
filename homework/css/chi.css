@@ -1,8 +1,9 @@
 /* CSS Stuff! */
 body {
-    font-family: sans-serif;
+    font-family: Verdana, Arial, sans-serif;
     background-image: url("../images/IehB7.png");
 }
+
 /* start header */
 header{
     background-image: url("../images/dh2.jpg");
@@ -37,13 +38,12 @@ nav li {
     width: 10%;
     text-align: center;
     vertical-align: middle;
-
-    background-color: Gainsboro;
-    border-radius: 3px;
     
-    border-style: solid;
-    border-color: black;
-    border-width: 1.5px;    
+    border-left: solid black 1.5px;
+}
+
+nav li:first-child {
+    border: 0px;
 }
 
 /*
@@ -74,7 +74,7 @@ main {
     min-height: 450px;
     
     border-radius: 3px;
-    background-color: white;
+    background-color: #e1fce0;
 }
 
 /* end main */
@@ -90,7 +90,9 @@ sidebar {
     padding: 5px;
     
     border-radius: 3px;
-    background-color: LightGray;
+    background-color: #e1fce0;
+
+    color: black;
 }
 
 sidebar img {
@@ -99,10 +101,6 @@ sidebar img {
     display: block;
     margin-left: auto;
     margin-right: auto;
-}
-
-sidebar p {
-    color: black;
 }
 
 /* end sidebar */
