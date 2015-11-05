@@ -9,6 +9,19 @@ $("#sidebarContent").click(toggleSidebarFeline);
 $("#register").click(toggleRegistration);
 $("#preparedstatements").click(togglePreparedStatements);
 
+$(function() {
+    $( "#slider" ).slider({
+      range: "max",
+      min: 1,
+      max: 100,
+      value: 1,
+      slide: function( event, ui ) {
+        $( "#ageInput" ).val( ui.value );
+      }
+    });
+    $( "#ageInput" ).val( $( "#slider" ).slider( "value" ) );
+});
+
 var toggleSidebar = true;
 var toggleRegistration = true;
 var togglePreparedStatements = true;
