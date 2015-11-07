@@ -9,15 +9,14 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Navbar Template for Bootstrap</title>
+    <title>spartalunch</title>
 
     <!-- Bootstrap core CSS -->
     <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
     <link href="css/flatly.bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="css/navbar.css" rel="stylesheet">
-
+    <link href="css/spartalunch.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -61,7 +60,7 @@
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="register.php">Register</a></li>
+              <li class="active"><a href="#">Register</a></li>
               <li><a href="#">Log in</a></li>
               <li><a href="../navbar-fixed-top/">Fixed top</a></li>
             </ul>
@@ -71,15 +70,50 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-        </p>
+        <div class="box">
+        <h1>Availability</h1>
+        <p>Set the times that you free for lunch!</p>
+        </div>
+
+      <div class="box">
+        <div class="btn-group">
+        <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          Day
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li><a>Monday</a></li>
+          <li><a>Tuesday</a></li>
+          <li><a>Wednesday</a></li>
+          <li><a>Thursday</a></li>
+          <li><a>Friday</a></li>
+        </ul>
+        </div>
+        </div>
+
+      <div class="btn-group">
+        <div class="dropdown">
+        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+          Time
+          <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+          <li><a>10:30 - 11:45</a></li>
+          <li><a>12:00 - 1:15</a></li>
+          <li><a>1:15 - 2:45</a></li>
+          <li><a>3:00 - 4:15</a></li>
+          <li><a>4:30 - 5:45</a></li>
+        </ul>
+
+      </div>
+
+      </div>
+
+
       </div>
 
     </div> <!-- /container -->
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -88,5 +122,6 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+    <script src="js/availability.js"></script>
   </body>
 </html>
