@@ -4,6 +4,6 @@
     $lastName = $_POST['lastName'];
     $username = $_POST['username'];
     $password = $_POST['password'];
-    // $id = insertAccount($username, $password);
-    // insertProfile($id, $firstName, $lastName);
+    $id = insertAccount($username, $password);
+    insertProfile($id, $firstName, $lastName);
 ?>
