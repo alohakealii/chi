@@ -2,7 +2,12 @@
 <html>
 <head>
     <title>Chi</title>
-    <link rel="stylesheet" href="chi.css">
+    <link rel="stylesheet" href="css/jquery-ui.min.css">
+    <link rel="stylesheet" href="css/chi.css">
+
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
+    <script type="text/javascript" src="js/chi.js"></script>
 
 </head>
 <body>
@@ -10,7 +15,7 @@
     <p>Team Chi</p>
 </header>
 <nav>
-    <ul>
+    <ul class="ui-widget-header ui-corner-all">
         <li><a href="http://cs.sjsu.edu/~mak/CS174/index.html">Course Page</a></li>
         <li><a href="http://cs.sjsu.edu/~mak/CS174/assignments/2/Assignment2.pdf">Assignment 2</a></li>
         <li><a href="https://www.google.com/?gws_rd=ssl">Google</a></li>
