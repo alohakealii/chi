@@ -7,6 +7,17 @@ try {
     echo "<p>Connection to database failed</p>";
 }
 
+function addAvailability($userID, $day, $time) {
+    global $con;
+    $sql = "INSERT INTO availability(userID, day, slot) VALUES (:userID, :day, :time)";
+    $q = $con -> prepare ($sql);
+    $q -> execute(array(':userID' => $userID,
+                        ':day' => $day,
+                        ':time' => $time));
+    $id = $con -> lastInsertId();
+    return $id;
+}
+
 function insertAccount($username, $password) {
     global $con;
     $sql = "INSERT INTO login(username, password) VALUES (:username, :password)";

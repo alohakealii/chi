@@ -70,19 +70,20 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <div class="box">
+        <div class="availability">
         <h1>Availability</h1>
-        <p>Set the times that you free for lunch!</p>
+        <p>Set the times that you are free for lunch!</p>
         </div>
 
-      <div class="box">
+
+      <div class="availability">
         <div class="btn-group">
         <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownDay" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
           Day
           <span class="caret"></span>
         </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <ul class="dropdown-menu" aria-labelledby="dropdownDay">
           <li><a>Monday</a></li>
           <li><a>Tuesday</a></li>
           <li><a>Wednesday</a></li>
@@ -94,22 +95,30 @@
 
       <div class="btn-group">
         <div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownTime" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
           Time
           <span class="caret"></span>
         </button>
-        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+        <ul class="dropdown-menu" aria-labelledby="dropdownTime">
           <li><a>10:30 - 11:45</a></li>
           <li><a>12:00 - 1:15</a></li>
           <li><a>1:15 - 2:45</a></li>
           <li><a>3:00 - 4:15</a></li>
           <li><a>4:30 - 5:45</a></li>
         </ul>
-
+        </div>
       </div>
 
+      <div class="btn-group">
+        <div class="dropdown">
+        <button type="button" class="btn btn-success" aria-haspopup="false" aria-expanded="false" onclick="addAvailability()">
+          Add
+          <span class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+        </button>
+        </div>
       </div>
 
+      <div id="availabilityList"></div>
 
       </div>
 

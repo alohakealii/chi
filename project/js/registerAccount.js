@@ -8,10 +8,11 @@ function register() {
         type: "POST",
         url: "php/registerAccount.php",
         data: {firstName: first, lastName: last, username: username, password: password},
-        success: function () {
+        success: function (data) {
             alert("Registration successful!");
             //document.location.href = "index.html";
             window.location = 'availability.php';
+            alert(data);
         },
         error: function(xhr, status, error) {
             var err = eval( xhr.responseText );
