@@ -1,14 +1,9 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en-US">
     <head>
         <meta charset="UTF-8">
         <title>Chi</title>
-        <link rel="stylesheet" href="css/jquery-ui.min.css">
-        <link rel="stylesheet" href="css/chi.css">
-
-        <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-        <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="js/chi.js"></script>
+        <link rel="stylesheet" href="chi.css">
     </head>
 
     <body>
@@ -16,7 +11,7 @@
             <p>Team Chi</p>
         </header>
         <nav>
-                <ul class="ui-widget-header ui-corner-all">
+                <ul>
                 <li><a href="http://cs.sjsu.edu/~mak/CS174/index.html">Course Page</a></li>
                 <li><a href="http://cs.sjsu.edu/~mak/CS174/assignments/2/Assignment2.pdf">Assignment 2</a></li>
                 <li><a href="https://www.google.com/?gws_rd=ssl">Google</a></li>
@@ -33,7 +28,7 @@
                 <p><a href="#">Site map</a></p>
             </sidebar>
 
-            <main>
+            <main> -->
             	<?php
                 class Person{
                     private $firstName;
@@ -178,9 +173,9 @@
                 // 	echo 'ERROR: '.$ex->getMessage();
                 // }
                 ?>
-            </main>
+            <!-- </main>
             <footer>
                 <p>Site is (c) Chi Team 2015</p>    
             </footer>
     </body>
-</html>
+</html> -->

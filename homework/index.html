@@ -2,21 +2,135 @@
 <html>
 <head>
     <title>Chi</title>
+    <link rel="stylesheet" href="chi.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="custom_ajax.js" type="text/javascript"></script>
 
-    <link rel="stylesheet" href="css/jquery-ui.min.css">
-    <link rel="stylesheet" href="css/chi.css">
+    <script type="text/javascript">
+        var toggleSidebar = true;
+        var toggleRegistration = true;
+        var togglePreparedStatements = true;
+        function validateName() {
+            var firstName = document.getElementById("firstName").value;
+            var lastName = document.getElementById("lastName").value;
 
-    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui.min.js"></script>
-    <script type="text/javascript" src="js/chi.js"></script>
+            var nameRE = /^[a-zA-Z]+$/;
+            if (!firstName.match(nameRE) || !lastName.match(nameRE)) {
+                alert("Invalid search: letters only!");
+                return false;
+            }
+        }
+        function toggleSidebarFeline() {
+            var sidebar ='\
+                <p><input type="button" value="Toggle Sidebar Feline" onclick="toggleSidebarFeline()" /></p>\
+                <p><a href="index.html">Home</a></p>\
+                <p><a href="cube.html">Animation</a></p>\
+                <p><a href="draw.html">Draw</a></p>\
+                <p><a href="#">Locations</a></p>\
+                <p><a href="#">Search</a></p>\
+                <p><a href="#">User Directory</a></p>\
+                <p><a href="#">Site map</a></p>';
+            var kitty = '\
+                <p><input type="button" value="Toggle Sidebar Feline" onclick="toggleSidebarFeline()" /></p>\
+                <img src="http://www.roflcat.com/images/cats/Cats_funny_costume.jpg" />\
+                <p> This is one rockin Metallicat!</p>';
+
+            if (toggleSidebar == true) {
+                var output = kitty;
+                toggleSidebar = false;
+            }
+            else {
+                var output = sidebar;
+                toggleSidebar = true
+            }
+            document.getElementById("sidebarContent").innerHTML = output;
+        }
+        function showRegistration() {
+            var text = '\
+                <form action="verify.php" method="post">\
+                    <fieldset>\
+                        <p>\
+                            <label>First name:</label>\
+                            <input name="firstName" type="text" value="Betty"/>\
+                        </p>\
+                        <p>\
+                            <label>Last name:</label>\
+                            <input name="lastName" type="text" value="Smith"/>\
+                        </p>\
+                        <p>\
+                            Gender:\
+                            <select name="gender">\
+                                <option value="both">Select</option>\
+                                <option value="male">Male</option>\
+                                <option value="female">Female</option>\
+                            </select>\
+                        </p>\
+                        <p>\
+                            Age:\
+                            <input type="radio" name="ageControl" value=">"/> Greater than\
+                            <input type="radio" name="ageControl" value="<"/> Less than\
+                            <input name="age" type="text"/>\
+                        </p>\
+                        <input type="submit" value="Submit" />\
+                    </fieldset>\
+                </form>';
+            if (toggleRegistration == true) {
+                toggleRegistration = false;
+            }
+            else {
+                text = '';
+                toggleRegistration = true;
+            }
+            document.getElementById("register").innerHTML = text;
+        }
+        function showPreparedStatements() {
+            var text = '\
+                <form action="avail.php" method="post">\
+                    <input type="submit" value="Check Availability"/>\
+                </form>\
+                <form action="lostusrnm.php" method="post" onsubmit="return validateName()" id="lostusernameform">\
+                    <fieldset>\
+                        <p>\
+                            <label>First Name</label>\
+                            <input type="text" name="firstName" value="Betty" id="firstName"/>\
+                        </p>\
+                        <p>\
+                            <label>Last Name</label>\
+                            <input type="text" name="lastName" value="Smith" id="lastName"/>\
+                        </p>\
+                        <input type="submit" value="submit"/>\
+                    </fieldset>\
+                </form>';
+                // <form action="searchusrs.php" method="post">\
+                //     <fieldset>\
+                //         <p>\
+                //             <label>Age Less Than</label>\
+                //             <input type="number" name="age" value="50"/>\
+                //         </p>\
+                //         <p>\
+                //             <label>Available After</label>\
+                //             <input type="number" name="startTime" value="3" min="1" max="24"/>\
+                //         </p>\
+                //     <input type="submit" value="submit"/>\
+                // </fieldset>\
+                // </form>
+            if (togglePreparedStatements == true) {
+                togglePreparedStatements = false;
+            }
+            else {
+                text = '';
+                togglePreparedStatements = true;
+            }
+            document.getElementById("preparedstatements").innerHTML = text;
+        }
+    </script>
 </head>
-
 <body>
 <header>
     <p>Team Chi</p>
 </header>
 <nav>
-    <ul class="ui-widget-header ui-corner-all">
+    <ul>
         <li><a href="http://cs.sjsu.edu/~mak/CS174/index.html">Course Page</a></li>
         <li><a href="http://cs.sjsu.edu/~mak/CS174/assignments/2/Assignment2.pdf">Assignment 2</a></li>
         <li><a href="https://www.google.com/?gws_rd=ssl">Google</a></li>
@@ -25,9 +139,15 @@
 </nav>
 
 <sidebar>
-    <p><button onclick="toggleSidebarFeline()">Toggle Sidebar Feline</button></p>
+    <!--
+    <img src="http://www.roflcat.com/images/cats/Cats_funny_costume.jpg" />
+    <p> This is one rockin Metallicat!</p>
+    Breaks the layout :(
+    -->
+
     <div id="sidebarContent">
-        <p><a href="/chi/homework/">Home</a></p>
+        <p><input type="button" value="Toggle Sidebar Feline" onclick="toggleSidebarFeline()" /></p>
+        <p><a href="index.html">Home</a></p>
         <p><a href="cube.html">Animation</a></p>
         <p><a href="draw.html">Draw</a></p>
         <p><a href="#">Locations</a></p>
@@ -38,79 +158,40 @@
 </sidebar>
 
 <main>
-    <div id="tabs">
-        <ul>
-            <li><a href="#register">Show Registration</a></li>
-            <li><a href="#preparedStatements">Show Prepared Statements</a></li>
-        </ul>
-        <div id="register">
-            <h2>Registration</h2>
-            <form action="verify.php" method="post">
-                <fieldset>
-                    <p>
-                        <label>First name:</label>
-                        <input name="firstName" type="text" value="Betty"/>
-                    </p>
-                    <p>
-                        <label>Last name:</label>
-                        <input name="lastName" type="text" value="Smith"/>
-                    </p>
-                    <p>
-                        Gender:
-                        <select name="gender">
-                            <option value="both">Select</option>
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
-                        </select>
-                    </p>
-                    <p>
-                        Age:
-                        <input type="radio" name="ageControl" value=">"/> Greater than
-                        <input type="radio" name="ageControl" value="<"/> Less than
-                        <input name="age" id="ageInput" type="text"/>
-                        <div id="slider"></div>
-                    </p>
-
-                    <button type="submit">Submit</button>
-                </fieldset>
-            </form>
-        </div>
-
-        <div id="preparedStatements">
-            <h2>Prepared SQL Statements</h2>
-            <form action="avail.php" method="post">
-                <button type="submit" id="checkAvailability">Check Availability</button>
-            </form><br />
-            <form action="lostusrnm.php" method="post" onsubmit="return validateName()">
-                <fieldset class="ui-widget ui-corner-all">
-                    <legend>Lost Username</legend>
-                    <p>
-                        <label>First Name</label>
-                        <input type="text" name="firstName" value="Betty" id="firstName"/>
-                    </p>
-                    <p>
-                        <label>Last Name</label>
-                        <input type="text" name="lastName" value="Smith" id="lastName"/>
-                    </p>
-                    <button type="submit">Submit</button>
-                </fieldset>
-            </form><br />
-            <form action="searchusrs.php" method="post">
-                <fieldset class="ui-widget ui-corner-all">
-                    <legend>Search Users</legend>
-                    <p>
-                        <label>Age Less Than</label>
-                        <input type="number" name="age" value="50"/>
-                    </p>
-                    <p>
-                        <label>Available After</label>
-                        <input type="number" name="startTime" value="3" min="1" max="24"/>
-                    </p>
-                <button type="submit">Submit</button>
-            </fieldset>
-            </form>
-        </div>
+    <p><input type="button" value="Show Registration" onclick="showRegistration()" /></p>
+    <div id="register">
     </div>
+
+    <p><input type="button" value="Show Prepared SQL Statements" onclick="showPreparedStatements()" /></p>
+    <div id="preparedstatements">
+    </div>
+    <!-- <form action="lostusrnm.php" method="post" onsubmit="return validateName()" id="lostusernameform">
+        <fieldset>
+            <p>
+                <label>First Name</label>
+                <input type="text" name="firstName" value="Betty" id="firstName"/>
+            </p>
+            <p>
+                <label>Last Name</label>
+                <input type="text" name="lastName" value="Smith" id="lastName"/>
+            </p>
+            <input type="submit" value="submit"/>
+        </fieldset>
+    </form> -->
+    <form action="searchusrs.php" method="post" id="searchform">
+        <fieldset>
+            <p>
+                <label>Age Less Than</label>
+                <input type="number" name="age" value="50"/>
+            </p>
+            <p>
+                <label>Available After</label>
+                <input type="number" name="startTime" value="3" min="1" max="24"/>
+            </p>
+        <input type="submit" value="submit"/>
+    </fieldset>
+    </form>
+    <div id="found"></div>
 </main>
 
 <footer>
