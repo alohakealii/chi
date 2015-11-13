@@ -22,7 +22,23 @@ function init() {
                 type: $(this).attr('method'), // GET or POST
                 url: $(this).attr('action'), // the file to call
                 success: function(response) { // on success..
-                    $('#found').html(response); // update the DIV
+                    $('#preparedStatements').html(response); // update the DIV
+                    $('#backBtn').button()
+                }
+            });
+            return false; // cancel original event to prevent form submitting
+        }
+    );
+
+    $('#lostusrnmform').submit( // catch the form's submit event
+        function() {
+            $.ajax({
+                data: $(this).serialize(), // get the form data
+                type: $(this).attr('method'), // GET or POST
+                url: $(this).attr('action'), // the file to call
+                success: function(response) { // on success..
+                    $('#preparedStatements').html(response); // update the DIV
+                    $('#backBtn').button()
                 }
             });
             return false; // cancel original event to prevent form submitting
@@ -47,6 +63,41 @@ function validateName() {
         alert("Invalid search: letters only!");
         return false;
     }
+}
+
+function preparedBack() {
+    $("#preparedStatements").html('\
+        <h2>Prepared SQL Statements</h2>\
+        <p><button type="submit" id="checkAvailability">Check Availability</button></p>\
+        <form action="lostusrnm.php" method="post" onsubmit="return validateName()">\
+            <fieldset class="ui-widget ui-corner-all">\
+                <legend>Lost Username</legend>\
+                <p>\
+                    <label>First Name</label>\
+                    <input type="text" name="firstName" value="Betty" id="firstName"/>\
+                </p>\
+                <p>\
+                    <label>Last Name</label>\
+                    <input type="text" name="lastName" value="Smith" id="lastName"/>\
+                </p>\
+                <button type="submit">Submit</button>\
+            </fieldset>\
+        </form><br />\
+        <form action="searchusrs.php" method="post" id="searchform">\
+            <fieldset class="ui-widget ui-corner-all">\
+                <legend>Search Users</legend>\
+                <p>\
+                    <label>Age Less Than</label>\
+                    <input type="number" name="age" value="50"/>\
+                </p>\
+                <p>\
+                    <label>Available After</label>\
+                    <input type="number" name="startTime" value="3" min="1" max="24"/>\
+                </p>\
+            <button type="submit">Submit</button>\
+        </fieldset>\
+        </form>');
+    init();
 }
 
 function toggleSidebarFeline() {
