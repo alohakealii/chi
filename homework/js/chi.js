@@ -3,13 +3,7 @@ $(init);
 function init() {
     $("#tabs").tabs();
     $("#checkAvailability").button()
-}
 
-$("#sidebarContent").click(toggleSidebarFeline);
-$("#register").click(toggleRegistration);
-$("#preparedstatements").click(togglePreparedStatements);
-
-$(function() {
     $( "#slider" ).slider({
       range: "max",
       min: 1,
@@ -20,7 +14,25 @@ $(function() {
       }
     });
     $( "#ageInput" ).val( $( "#slider" ).slider( "value" ) );
-});
+
+    $('#searchform').submit(
+        function() {
+            $.ajax({
+                data: $(this).serialize(),
+                type: $(this).attr('method'),
+                url: $(this).attr('action'),
+                success: function(response) {
+                    $('#found').html(response);
+                }
+            });
+            return false;
+        }
+    );
+}
+
+$("#sidebarContent").click(toggleSidebarFeline);
+$("#register").click(toggleRegistration);
+$("#preparedstatements").click(togglePreparedStatements);
 
 var toggleSidebar = true;
 var toggleRegistration = true;
