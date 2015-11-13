@@ -15,17 +15,17 @@ function init() {
     });
     $( "#ageInput" ).val( $( "#slider" ).slider( "value" ) );
 
-    $('#searchform').submit(
+    $('#searchform').submit( // catch the form's submit event
         function() {
             $.ajax({
-                data: $(this).serialize(),
-                type: $(this).attr('method'),
-                url: $(this).attr('action'),
-                success: function(response) {
-                    $('#found').html(response);
+                data: $(this).serialize(), // get the form data
+                type: $(this).attr('method'), // GET or POST
+                url: $(this).attr('action'), // the file to call
+                success: function(response) { // on success..
+                    $('#found').html(response); // update the DIV
                 }
             });
-            return false;
+            return false; // cancel original event to prevent form submitting
         }
     );
 }
