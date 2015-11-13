@@ -68,5 +68,5 @@ catch(PDOException $ex) {
     echo 'ERROR: '.$ex->getMessage();
 };
 
-print '    <p><button type="button" onclick="preparedBack()" id="backBtn">Back</button></p>'
+print '    <p><button onclick="preparedBack()" id="backBtn">Back</button></p>'
 ?>

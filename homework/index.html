@@ -44,7 +44,7 @@
         </ul>
         <div id="register">
             <h2>Registration</h2>
-            <form action="verify.php" method="post">
+            <form action="verify.php" method="post" id="regform">
                 <fieldset>
                     <p>
                         <label>First name:</label>
@@ -77,7 +77,9 @@
 
         <div id="preparedStatements">
             <h2>Prepared SQL Statements</h2>
-            <p><button type="submit" id="checkAvailability">Check Availability</button></p>
+            <form action="avail.php" method="post" id="availform">
+                <button type="submit" id="checkAvailability">Check Availability</button>
+            </form><br />            
             <form action="lostusrnm.php" method="post" id="lostusrnmform" onsubmit="return validateName()">
                 <fieldset class="ui-widget ui-corner-all">
                     <legend>Lost Username</legend>
