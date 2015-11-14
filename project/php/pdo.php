@@ -51,6 +51,16 @@ function insertProfile($id, $firstName, $lastName) {
                       ':lastName' => $lastName));
 }
 
+function removeAvailability($userID, $day, $time) {
+  global $con;
+  $sql = "DELETE FROM availability WHERE userID = :userID AND day = :day AND slot = :time";
+  $q = $con -> prepare($sql);
+  $status = $q -> execute(array(':userID' => $userID,
+                      ':day' => $day,
+                      ':time' => $time));
+  return $status;
+}
+
 function verifyLogin($username, $password) {
   global $con;
   $sql = "SELECT * FROM login WHERE username = :username AND password = :password";

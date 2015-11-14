@@ -12,7 +12,6 @@ function addAvailability() {
     alert("Please select a day or time");
   }
   else {
-
     $.ajax({
       type: "POST",
       url: "php/addAvailability.php",
@@ -26,28 +25,46 @@ function addAvailability() {
         }
         else {
           alert("error");
-        }
-        
+        } 
       },
       error: function(xhr, status, error) {
         var err = eval( xhr.responseText );
         alert(err.Message);
       }
-    });
-
-
-    
+    }); 
   }
 }
 
 function removeAvailability() {
   
   $(document).on('click', '.btn-danger', function() {
-    var value = $(this).text();
-  var dateRE = new RegExp(/([a-zA-Z]*)\s([0-9]*:[0-9]*\s-\s[0-9]*:[0-9]*)/);
-  var v = dateRE.exec(value);
-  console.log(RegExp.$1 + " " + RegExp.$2);
+    var dateText = $(this).text();
+    var dateRE = new RegExp(/([a-zA-Z]*)\s([0-9]*:[0-9]*\s-\s[0-9]*:[0-9]*)/);
+    var split = dateRE.exec(dateText);
+    var day = RegExp.$1;
+    var time = RegExp.$2;
     //console.log($(this).text())
-    //$(this).remove();
+
+    $.ajax({
+      type: "POST",
+      url: "php/removeAvailability.php",
+      data: {day: day, time: time},
+      success: function (data) {
+        if (data == true) {
+          alert(data);
+          $(this).remove();
+        }
+        else {
+          alert("error");
+        } 
+      },
+      error: function(xhr, status, error) {
+        var err = eval( xhr.responseText );
+        alert(err.Message);
+      }
+    }); 
+
+
+
   });
 }
