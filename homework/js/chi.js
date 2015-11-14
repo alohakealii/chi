@@ -3,13 +3,7 @@ $(init);
 function init() {
     $("#tabs").tabs();
     $("#checkAvailability").button()
-}
 
-$("#sidebarContent").click(toggleSidebarFeline);
-$("#register").click(toggleRegistration);
-$("#preparedstatements").click(togglePreparedStatements);
-
-$(function() {
     $( "#slider" ).slider({
       range: "max",
       min: 1,
@@ -20,7 +14,71 @@ $(function() {
       }
     });
     $( "#ageInput" ).val( $( "#slider" ).slider( "value" ) );
-});
+
+    $('#regform').submit( // catch the form's submit event
+        function() {
+            $.ajax({
+                data: $(this).serialize(), // get the form data
+                type: $(this).attr('method'), // GET or POST
+                url: $(this).attr('action'), // the file to call
+                success: function(response) { // on success..
+                    $('#register').html(response); // update the DIV
+                    $('#backBtn').button()
+                }
+            });
+            return false; // cancel original event to prevent form submitting
+        }
+    );
+
+    $('#searchform').submit( // catch the form's submit event
+        function() {
+            $.ajax({
+                data: $(this).serialize(), // get the form data
+                type: $(this).attr('method'), // GET or POST
+                url: $(this).attr('action'), // the file to call
+                success: function(response) { // on success..
+                    $('#preparedStatements').html(response); // update the DIV
+                    $('#backBtn').button()
+                }
+            });
+            return false; // cancel original event to prevent form submitting
+        }
+    );
+
+    $('#lostusrnmform').submit( // catch the form's submit event
+        function() {
+            $.ajax({
+                data: $(this).serialize(), // get the form data
+                type: $(this).attr('method'), // GET or POST
+                url: $(this).attr('action'), // the file to call
+                success: function(response) { // on success..
+                    $('#preparedStatements').html(response); // update the DIV
+                    $('#backBtn').button()
+                }
+            });
+            return false; // cancel original event to prevent form submitting
+        }
+    );
+
+    $('#availform').submit( // catch the form's submit event
+        function() {
+            $.ajax({
+                data: $(this).serialize(), // get the form data
+                type: $(this).attr('method'), // GET or POST
+                url: $(this).attr('action'), // the file to call
+                success: function(response) { // on success..
+                    $('#preparedStatements').html(response); // update the DIV
+                    $('#backBtn').button()
+                }
+            });
+            return false; // cancel original event to prevent form submitting
+        }
+    );
+}
+
+$("#sidebarContent").click(toggleSidebarFeline);
+$("#register").click(toggleRegistration);
+$("#preparedstatements").click(togglePreparedStatements);
 
 var toggleSidebar = true;
 var toggleRegistration = true;
@@ -35,6 +93,77 @@ function validateName() {
         alert("Invalid search: letters only!");
         return false;
     }
+}
+
+function regBack() {
+    $("#register").html('\
+        <h2>Registration</h2>\
+        <form action="verify.php" method="post" id="regform">\
+            <fieldset>\
+                <p>\
+                    <label>First name:</label>\
+                    <input name="firstName" type="text" value="Betty"/>\
+                </p>\
+                <p>\
+                    <label>Last name:</label>\
+                    <input name="lastName" type="text" value="Smith"/>\
+                </p>\
+                <p>\
+                    Gender:\
+                    <select name="gender">\
+                        <option value="both">Select</option>\
+                        <option value="male">Male</option>\
+                        <option value="female">Female</option>\
+                    </select>\
+                </p>\
+                <p>\
+                    Age:\
+                    <input type="radio" name="ageControl" value=">"/> Greater than\
+                    <input type="radio" name="ageControl" value="<"/> Less than\
+                    <input name="age" id="ageInput" type="text"/>\
+                    <div id="slider"></div>\
+                </p>\
+                <button type="submit">Submit</button>\
+            </fieldset>\
+        </form>');
+    init();
+}
+
+function preparedBack() {
+    $("#preparedStatements").html('\
+        <h2>Prepared SQL Statements</h2>\
+        <form action="avail.php" method="post" id="availform">\
+            <button type="submit" id="checkAvailability">Check Availability</button>\
+        </form><br />\
+        <form action="lostusrnm.php" method="post" id="lostusrnmform" onsubmit="return validateName()">\
+            <fieldset class="ui-widget ui-corner-all">\
+                <legend>Lost Username</legend>\
+                <p>\
+                    <label>First Name</label>\
+                    <input type="text" name="firstName" value="Betty" id="firstName"/>\
+                </p>\
+                <p>\
+                    <label>Last Name</label>\
+                    <input type="text" name="lastName" value="Smith" id="lastName"/>\
+                </p>\
+                <button type="submit">Submit</button>\
+            </fieldset>\
+        </form><br />\
+        <form action="searchusrs.php" method="post" id="searchform">\
+            <fieldset class="ui-widget ui-corner-all">\
+                <legend>Search Users</legend>\
+                <p>\
+                    <label>Age Less Than</label>\
+                    <input type="number" name="age" value="50"/>\
+                </p>\
+                <p>\
+                    <label>Available After</label>\
+                    <input type="number" name="startTime" value="3" min="1" max="24"/>\
+                </p>\
+            <button type="submit">Submit</button>\
+        </fieldset>\
+        </form>');
+    init();
 }
 
 function toggleSidebarFeline() {
