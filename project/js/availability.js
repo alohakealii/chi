@@ -18,10 +18,16 @@ function addAvailability() {
       url: "php/addAvailability.php",
       data: {userID: userID, day: day, time: time},
       success: function (data) {
-        var button = '<div class="btn-group"><button class="btn btn-danger btn-group" id="availability-' + data + '" onclick="removeAvailability(' + data + ')" title="Click to remove">' + 
-        day + ' ' + time +
-        '</button></div>';
-        $('#availabilityList').append(button);
+        if (data == true) {
+          var button = '<div class="btn-group"><button class="btn btn-danger btn-group" onclick="removeAvailability()" title="Click to remove">' + 
+          day + ' ' + time +
+          '</button></div>';
+          $('#availabilityList').append(button);
+        }
+        else {
+          alert("error");
+        }
+        
       },
       error: function(xhr, status, error) {
         var err = eval( xhr.responseText );
@@ -34,7 +40,14 @@ function addAvailability() {
   }
 }
 
-function removeAvailability(availabilityID) {
-  $("'#availability-" + availabilityID + "'").remove();
-  //alert(value);
+function removeAvailability() {
+  
+  $(document).on('click', '.btn-danger', function() {
+    var value = $(this).text();
+  var dateRE = new RegExp(/([a-zA-Z]*)\s([0-9]*:[0-9]*\s-\s[0-9]*:[0-9]*)/);
+  var v = dateRE.exec(value);
+  console.log(RegExp.$1 + " " + RegExp.$2);
+    //console.log($(this).text())
+    //$(this).remove();
+  });
 }

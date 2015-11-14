@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>spartalunch</title>
+    <title>Navbar Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
     <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
@@ -17,6 +17,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/navbar.css" rel="stylesheet">
+
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -39,7 +40,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">spartalunch124</a>
+            <a class="navbar-brand" href="#">spartalunch</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -60,7 +61,7 @@
               </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-              <li class="active"><a href="#">Register</a></li>
+              <li class="active"><a href="register.php">Register</a></li>
               <li><a href="login.php">Log in</a></li>
               <li><a href="../navbar-fixed-top/">Fixed top</a></li>
             </ul>
@@ -70,33 +71,25 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Register</h1>
-        <p>Sign up now to start using spartalunch!</p>
-
-        <!-- Registration form -->
-        <form>
+        <h1>Log in</h1>
+        <p>just do it</p>
+        <form class="form-inline">
           <div class="form-group">
-            <label for="firstName">First name</label>
-            <input type="text" class="form-control" id="firstName" placeholder="First name">
+            <label for="usernameInput">Username</label>
+            <input type="text" class="form-control" id="usernameInput" placeholder="Username">
           </div>
           <div class="form-group">
-            <label for="lastName">Last name</label>
-            <input type="text" class="form-control" id="lastName" placeholder="Last name">
+            <label for="passwordInput">Password</label>
+            <input type="password" class="form-control" id="passwordInput" placeholder="Password">
           </div>
-          <div class="form-group">
-            <label for="username">Username</label>
-            <input type="text" class="form-control" id="username" placeholder="Username">
-          </div>
-          <div class="form-group">
-            <label for="password">Password</label>
-            <input type="password" class="form-control" id="password" placeholder="Password">
-          </div>
-          <button type="button" class="btn btn-primary" onclick="register()">Submit</button>
+          <button type="button" class="btn btn-success" aria-haspopup="false" aria-expanded="false" onclick="login()">
+          Log in
+        </button>
         </form>
-
       </div>
 
     </div> <!-- /container -->
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -105,6 +98,6 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
-    <script src="js/registerAccount.js"></script>
+    <script src="js/login.js"></script>
   </body>
 </html>
