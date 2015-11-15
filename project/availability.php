@@ -60,7 +60,7 @@
                   <li><a href="#">Profile</a></li>
                   <li role="separator" class="divider"></li>
                   <!-- <li class="dropdown-header">Nav header</li> -->
-                  <li><a href="#">Log out</a></li>
+                  <li><a onclick="logout()">Log out</a></li>
                 </ul>
               </li>
             </ul>
@@ -119,7 +119,6 @@
       </div>
 
       <div id="availabilityList"></div>
-
       </div>
 
     </div> <!-- /container -->
@@ -131,6 +130,7 @@
     <script src="js/bootstrap.min.js"></script>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
+    <script src="js/home.js"></script>
     <script src="js/availability.js"></script>
   </body>
 </html>

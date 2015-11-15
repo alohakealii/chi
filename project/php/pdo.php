@@ -62,6 +62,20 @@ function removeAvailability($userID, $day, $time) {
   return $status;
 }
 
+function retrieveAvailability($userID) {
+  global $con;
+  $sql = "SELECT day, slot FROM availability WHERE userID = :userID ORDER BY FIELD(day, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')";
+  $q = $con -> prepare($sql);
+  $q -> execute(array(':userID' => $userID));
+  $rows = $q -> fetchAll();
+  if (count($rows) == 0) {
+    return 0;
+  }
+  else {
+    return $rows;
+  }
+}
+
 function verifyLogin($username, $password) {
   global $con;
   $sql = "SELECT * FROM login WHERE username = :username AND password = :password";

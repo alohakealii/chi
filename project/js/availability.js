@@ -1,3 +1,7 @@
+$(document).ready(function() {
+  retrieveAvailability();
+});
+
 $(".dropdown-menu li a").click(function(){
   $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
   $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
@@ -17,21 +21,15 @@ function addAvailability() {
       data: {day: day, time: time},
       success: function (data) {
         if (data == true) {
-          var id = (day + time).replace(/ /g, "");
-          id = id.replace(/\s|:|-/g, "");
-          var param = "'" + id + "'";
-          var button = '<div class="btn-group"><button id="' + id + '" class="btn btn-danger btn-group" onclick="removeAvailability(' + param + ')" title="Click to remove">' + 
-          day + ' ' + time +
-          '</button></div>';
+          var button = createAvailabilityBtn(day + " " + time);
           $('#availabilityList').append(button);
         }
         else {
           alert("error");
         } 
       },
-      error: function(xhr, status, error) {
-        var err = eval( xhr.responseText );
-        alert(err.Message);
+      error: function(data) {
+        console.log(data);
       }
     }); 
   }
@@ -68,4 +66,31 @@ function removeAvailability(id) {
     });
 
   });
+}
+
+// retrieves availability from db using username stored in session and creates a button for each row
+function retrieveAvailability() {
+  var response = $.ajax({
+    type: "POST",
+    url: "php/retrieveAvailability.php",
+    async: false
+    }).responseText;
+
+    if (response != 0) {
+      var availabilityArray = JSON.parse(response);
+      for (i = 0; i < availabilityArray.length; i++) {
+        var button = createAvailabilityBtn(availabilityArray[i]["day"] + " " + availabilityArray[i]["slot"]);
+        $('#availabilityList').append(button);
+      }
+    }
+}
+
+// takes a string in format "DAY 00:00 - 00:00" and tranforms it into a button with id "DAY000000"
+function createAvailabilityBtn(id) {
+  var formatID = id.replace(/\s|:|-/g, "");
+  var param = "'" + formatID + "'";
+  var button = '<div class="btn-group"><button id="' + formatID + '" class="btn btn-danger btn-group" onclick="removeAvailability(' + param + ')" title="Click to remove">' + 
+  id +
+  '</button></div>';
+  return button;
 }
