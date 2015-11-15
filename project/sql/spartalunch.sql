@@ -1,5 +1,3 @@
-CREATE DATABASE  IF NOT EXISTS `spartalunch` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `spartalunch`;
 -- MySQL dump 10.13  Distrib 5.6.24, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: spartalunch
@@ -26,9 +24,10 @@ DROP TABLE IF EXISTS `availability`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `availability` (
   `userID` int(11) NOT NULL,
-  `day` varchar(45) DEFAULT NULL,
-  `slot` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`userID`),
+  `day` varchar(45) NOT NULL DEFAULT '',
+  `slot` varchar(45) NOT NULL DEFAULT '',
+  PRIMARY KEY (`userID`,`day`,`slot`),
+  KEY `availability_userID_idx` (`userID`),
   CONSTRAINT `availability_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -104,7 +103,7 @@ CREATE TABLE `login` (
   `password` varchar(45) NOT NULL,
   PRIMARY KEY (`userID`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -153,4 +152,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-07  2:36:16
+-- Dump completed on 2015-11-14 17:37:51

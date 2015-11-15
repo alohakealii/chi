@@ -1,9 +1,10 @@
 <?php
-session_start();
+  session_start();
+  require "pdo.php";
+  $userID = $_SESSION["userID"];
+  $day = $_POST["day"];
+  $time = $_POST["time"];
 
-$userID = $_SESSION["userID"];
-
-
-$status = removeAvailability($userID, $day, $time);
-echo $status;
+  $status = removeAvailability($userID, $day, $time);
+  echo $status;
 ?>

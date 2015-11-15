@@ -55,9 +55,10 @@ function removeAvailability($userID, $day, $time) {
   global $con;
   $sql = "DELETE FROM availability WHERE userID = :userID AND day = :day AND slot = :time";
   $q = $con -> prepare($sql);
-  $status = $q -> execute(array(':userID' => $userID,
+  $q -> execute(array(':userID' => $userID,
                       ':day' => $day,
                       ':time' => $time));
+  $status = $q -> rowCount();
   return $status;
 }
 

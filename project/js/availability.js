@@ -4,7 +4,6 @@ $(".dropdown-menu li a").click(function(){
 });
 
 function addAvailability() {
-  var userID = 1; // temporary value
   var day = $('#dropdownDay').text().trim();
   var time = $('#dropdownTime').text().trim();
 
@@ -15,10 +14,13 @@ function addAvailability() {
     $.ajax({
       type: "POST",
       url: "php/addAvailability.php",
-      data: {userID: userID, day: day, time: time},
+      data: {day: day, time: time},
       success: function (data) {
         if (data == true) {
-          var button = '<div class="btn-group"><button class="btn btn-danger btn-group" onclick="removeAvailability()" title="Click to remove">' + 
+          var id = (day + time).replace(/ /g, "");
+          id = id.replace(/\s|:|-/g, "");
+          var param = "'" + id + "'";
+          var button = '<div class="btn-group"><button id="' + id + '" class="btn btn-danger btn-group" onclick="removeAvailability(' + param + ')" title="Click to remove">' + 
           day + ' ' + time +
           '</button></div>';
           $('#availabilityList').append(button);
@@ -35,24 +37,25 @@ function addAvailability() {
   }
 }
 
-function removeAvailability() {
-  
-  $(document).on('click', '.btn-danger', function() {
-    var dateText = $(this).text();
+function removeAvailability(id) {
+  $(document).off('click', '#' + id); //unbind previous handlers
+  $(document).on('click', '#' + id, function() {
+    var button = $(this);
+    // use reg exp to split button text into parameters for ajax call
+    var dateText = button.text();
     var dateRE = new RegExp(/([a-zA-Z]*)\s([0-9]*:[0-9]*\s-\s[0-9]*:[0-9]*)/);
     var split = dateRE.exec(dateText);
     var day = RegExp.$1;
     var time = RegExp.$2;
-    //console.log($(this).text())
 
+    // delete availability from database and remove from view on success
     $.ajax({
       type: "POST",
       url: "php/removeAvailability.php",
       data: {day: day, time: time},
       success: function (data) {
         if (data == true) {
-          alert(data);
-          $(this).remove();
+          button.parent().remove();
         }
         else {
           alert("error");
@@ -62,9 +65,7 @@ function removeAvailability() {
         var err = eval( xhr.responseText );
         alert(err.Message);
       }
-    }); 
-
-
+    });
 
   });
 }

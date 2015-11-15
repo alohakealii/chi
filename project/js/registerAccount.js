@@ -11,8 +11,7 @@ function register() {
         success: function (data) {
             alert("Registration successful!");
             //document.location.href = "index.html";
-            window.location = 'availability.php';
-            alert(data);
+            window.location = 'login.php';
         },
         error: function(xhr, status, error) {
             var err = eval( xhr.responseText );
