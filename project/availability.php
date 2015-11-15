@@ -57,7 +57,7 @@
                 <ul class="dropdown-menu">
                   <li><a href="availability.php">Availability</a></li>
                   <li><a href="#">Interests</a></li>
-                  <li><a href="#">Profile</a></li>
+                  <li><a href="profile.php">Profile</a></li>
                   <li role="separator" class="divider"></li>
                   <!-- <li class="dropdown-header">Nav header</li> -->
                   <li><a href="#">Log out</a></li>

@@ -77,4 +77,24 @@ function verifyLogin($username, $password) {
   }
 }
 
+function updateProfile($userID, $firstName, $lastName, $age, $gender, $description) {
+  global $con;
+  $sql = "UPDATE profile SET firstName = :firstName, lastName = :lastName, age = :age, gender = :gender, description = :description WHERE userID = :userID";
+  $q = $con -> prepare($sql);
+  $q -> execute(array(":userID" => $userID,
+                      ":firstName" => $firstName,
+                      ":lastName" => $lastName,
+                      ":age" => $age,
+                      ":gender" => $gender,
+                      ":description" => $description));
+}
+
+function getProfileInformation($userID){
+  global $con;
+  $sql = "SELECT * FROM profile WHERE profile.userID = :userID";
+  $q = $con -> prepare($sql);
+  $q -> execute(array(":userID" => $userID));
+  $data = $q -> fetchAll();
+  return $data;
+}
 ?>
