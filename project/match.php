@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -14,10 +18,10 @@
     <!-- Bootstrap core CSS -->
     <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
     <link href="css/flatly.bootstrap.min.css" rel="stylesheet">
-    <link href="css/spartalunch.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
-
+    <link href="css/spartalunch.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -29,22 +33,32 @@
   <body>
 
     <div class="container">
-
       <!-- Static navbar -->
       <nav class="navbar navbar-default">
       </nav>
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
-        <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
-        </p>
-      </div>
+        <div>
+        <h1>Match</h1>
+        <p>Find someone to eat lunch with!</p>
+        </div>
+
+        <div id="matchInput">
+          <button class="btn btn-success" onclick="match()">Match me</button>
+        </div>
+
+        
+  </div>
 
     </div> <!-- /container -->
 
+    <div class="container marketing">
+
+      <!-- Three columns of text below the carousel -->
+      <div class="row" id="matchList">
+      </div><!-- /.row -->
+    </div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

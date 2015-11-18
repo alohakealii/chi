@@ -1,11 +1,22 @@
 $(document).ready(function() {
+  $('#contentInfo').one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+    function() {
+      $('#availabilityInputs').removeClass('hidden');
+      $('#availabilityInputs').addClass('animated fadeInDown');
+    }
+  );
+  
   retrieveAvailability();
+
+  $(".dropdown-menu li a").click(function(){
+    $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
+    $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
+  });
+
+
 });
 
-$(".dropdown-menu li a").click(function(){
-  $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
-  $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
-});
+
 
 function addAvailability() {
   var day = $('#dropdownDay').text().trim();
@@ -53,7 +64,13 @@ function removeAvailability(id) {
       data: {day: day, time: time},
       success: function (data) {
         if (data == true) {
-          button.parent().remove();
+          button.parent().addClass("animated bounceOutDown");
+          // button.parent().one('webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend',
+          //   function() {
+          //     button.parent().remove();
+          //   });
+          
+          // button.parent().remove();
         }
         else {
           alert("error");
@@ -80,8 +97,21 @@ function retrieveAvailability() {
       var availabilityArray = JSON.parse(response);
       for (i = 0; i < availabilityArray.length; i++) {
         var button = createAvailabilityBtn(availabilityArray[i]["day"] + " " + availabilityArray[i]["slot"]);
-        $('#availabilityList').append(button);
+
+        // no delay on adding the first element
+        if (i == 0) {
+          $('#availabilityList').append(button);
+        }
+        else {
+          $('#availabilityList').delay(300).queue(function(next) {
+            $(this).append(button);
+            next();
+          });
+        }
+
       }
+      
+
     }
 }
 
@@ -89,7 +119,7 @@ function retrieveAvailability() {
 function createAvailabilityBtn(id) {
   var formatID = id.replace(/\s|:|-/g, "");
   var param = "'" + formatID + "'";
-  var button = '<div class="btn-group"><button id="' + formatID + '" class="btn btn-danger btn-group" onclick="removeAvailability(' + param + ')" title="Click to remove">' + 
+  var button = '<div class="btn-group animated bounceInDown"><button id="' + formatID + '" class="btn btn-danger btn-group" onclick="removeAvailability(' + param + ')" title="Click to remove">' + 
   id +
   '</button></div>';
   return button;

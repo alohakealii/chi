@@ -22,6 +22,24 @@ function addAvailability($userID, $day, $time) {
   }
 }
 
+function getMatch($userID) {
+  global $con;
+  $sql = "
+    SELECT firstName, lastName, availability.userID, availability.day, availability.slot 
+    FROM profile, availability, (SELECT * FROM availability WHERE userid = :userID) as a
+    WHERE availability.day = a.day AND availability.slot = a.slot AND availability.userid != :userID AND profile.userID = availability.userID
+  ";
+  $q = $con -> prepare($sql);
+  $q -> execute(array(":userID" => $userID));
+  $rows = $q -> fetchAll();
+  if (count($rows) == 0) {
+    return 0;
+  }
+  else {
+    return $rows;
+  }
+}
+
 function getUserInfoByUsername($username) {
   global $con;
   $sql = "SELECT firstName, lastName, profile.userID FROM profile, login WHERE login.userID = profile.userID AND login.username = :username";

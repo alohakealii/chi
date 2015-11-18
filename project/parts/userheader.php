@@ -13,6 +13,7 @@
             <ul class="nav navbar-nav">
               <li><a href="#">About</a></li>
               <li><a href="#">Contact</a></li>
+              <li><a href="match.php">Find</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
               <li class="dropdown">
