@@ -1,3 +1,7 @@
+<?php
+  session_start();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -9,14 +13,14 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>spartalunch</title>
+    <title>Navbar Template for Bootstrap</title>
 
     <!-- Bootstrap core CSS -->
     <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
     <link href="css/flatly.bootstrap.min.css" rel="stylesheet">
-    <link href="css/spartalunch.css" rel="stylesheet">
 
     <!-- Custom styles for this template -->
+    <link href="css/spartalunch.css" rel="stylesheet">
 
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -36,10 +40,10 @@
 
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
-        <h1>Navbar example</h1>
-        <p>This example is a quick exercise to illustrate how the default, static navbar and fixed to top navbar work. It includes the responsive CSS and HTML, so it also adapts to your viewport and device.</p>
+        <h1>Welcome <?php echo $_SESSION["firstName"]?>!</h1>
+        <p>First, set the times that you are available</p>
         <p>
-          <a class="btn btn-lg btn-primary" href="../../components/#navbar" role="button">View navbar docs &raquo;</a>
+          <a class="btn btn-primary" href="availability.php" role="button">Availability</a>
         </p>
       </div>
 
