@@ -22,6 +22,24 @@ function addAvailability($userID, $day, $time) {
   }
 }
 
+function getMatch($userID) {
+  global $con;
+  $sql = "
+    SELECT firstName, lastName, availability.userID, availability.day, availability.slot 
+    FROM profile, availability, (SELECT * FROM availability WHERE userid = :userID) as a
+    WHERE availability.day = a.day AND availability.slot = a.slot AND availability.userid != :userID AND profile.userID = availability.userID
+  ";
+  $q = $con -> prepare($sql);
+  $q -> execute(array(":userID" => $userID));
+  $rows = $q -> fetchAll();
+  if (count($rows) == 0) {
+    return 0;
+  }
+  else {
+    return $rows;
+  }
+}
+
 function getUserInfoByUsername($username) {
   global $con;
   $sql = "SELECT firstName, lastName, profile.userID FROM profile, login WHERE login.userID = profile.userID AND login.username = :username";
@@ -62,6 +80,20 @@ function removeAvailability($userID, $day, $time) {
   return $status;
 }
 
+function retrieveAvailability($userID) {
+  global $con;
+  $sql = "SELECT day, slot FROM availability WHERE userID = :userID ORDER BY FIELD(day, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')";
+  $q = $con -> prepare($sql);
+  $q -> execute(array(':userID' => $userID));
+  $rows = $q -> fetchAll();
+  if (count($rows) == 0) {
+    return 0;
+  }
+  else {
+    return $rows;
+  }
+}
+
 function verifyLogin($username, $password) {
   global $con;
   $sql = "SELECT * FROM login WHERE username = :username AND password = :password";
@@ -89,12 +121,34 @@ function updateProfile($userID, $firstName, $lastName, $age, $gender, $descripti
                       ":description" => $description));
 }
 
+function checkForGuest($userID, $firstName, $lastName, $age, $gender, $description){
+  global $con;
+  $sql = "SELECT userID FROM profile WHERE firstName = :firstName, lastName = :lastName, age = :age, gender = :gender, description = :description";
+  $q = $con -> prepare($sql);
+  $q -> execute(array(":firstName" => $firstName,
+                      ":lastName" => $lastName,
+                      ":age" => $age,
+                      ":gender" => $gender,
+                      ":description" => $description));
+  $data = $q -> fetchAll();
+  if ($data[0]['userID'] == $userID){
+    return true;
+  }
+  else{
+    return false;
+  }
+}
 function getProfileInformation($userID){
   global $con;
-  $sql = "SELECT * FROM profile WHERE profile.userID = :userID";
+  $sql = "SELECT firstName, lastName, age, gender, description FROM profile WHERE userID = :userID";
   $q = $con -> prepare($sql);
   $q -> execute(array(":userID" => $userID));
   $data = $q -> fetchAll();
-  return $data;
+  if(count($data) == 0){
+    return 0;
+  }else{
+    return $data;  
+  }
+  
 }
 ?>

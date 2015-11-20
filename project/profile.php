@@ -31,7 +31,7 @@ session_start();
       <![endif]-->
     </head>
 
-    <body>
+    <body onload="forGuest()"><!-- onload="forGuest()" -->
      <div class="container">
 
       <!-- Static navbar -->
@@ -81,16 +81,17 @@ session_start();
            <div>
             <div class="card">
               <div>
-                <h2 class="text-center"><p id="firstName">first</p><p id="lastName">last</p></h2>
+                <h2 id="name"></h2>
+                <p id="firstName" hidden></p><p id="lastName" hidden></p>
                 <div>
                  <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
                  <div class="avatar">
-                   <img class="center-block"src="http://www.petco.com/assets/product_images/live_animal/beardedDragon_D.jpg" alt=""/>
+                   <img class="center-block"src="http://img2.wikia.nocookie.net/__cb20140321040656/ncaa-football/images/c/c0/San_Jose_State_Spartans.jpg" alt=""/>
                  </div>
                  <div class="content">
-                  <p id="age" class="text-center">Age</p>
-                  <p id="gender" class="text-center">Gender</p>
-                  <p id="decription" class="text-center">Description</p>
+                  <p id="age" class="text-center"></p>
+                  <p id="gender" class="text-center"></p>
+                  <p id="description" class="text-center"></p>
                   <p><button type="button" class="btn btn-default center-block" id="editProfileBtn">Edit</button></p>
 
                   <!-- Edit Profile Form -->
