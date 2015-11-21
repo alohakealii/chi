@@ -31,9 +31,8 @@ session_start();
       <![endif]-->
     </head>
 
-    <body onload="forGuest()"><!-- onload="forGuest()" -->
+    <body onload="populateProfile()">
      <div class="container">
-
       <!-- Static navbar -->
       <nav class="navbar navbar-default">
         <div class="container-fluid">
@@ -95,29 +94,42 @@ session_start();
                   <p><button type="button" class="btn btn-default center-block" id="editProfileBtn">Edit</button></p>
 
                   <!-- Edit Profile Form -->
-                  <form id="editProfile" style="display:none;" class="form-inline">
-                    <div class="form-group">
-                      <label for="firstNameChange">First Name</label>
-                      <input type="text" class="form-control" id="firstNameChange">
+                  <div class="modal fade" id="updateProfileModal">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                        <div Class="modal-header">
+                          <button type"button" class="close" data-dismiss="modal">&times;</button>
+                          <h4 style="color:red;"><span class="glyphicon glyphicon-edit"></span>Edit Profile</h4>
+                        </div>
+                        <div class="modal-body">
+                          <form role="form" id="editProfile" class="form-inline">
+                            <div class="form-group col-md-12">
+                              <label for="firstNameChange" class="col-md-4">First Name</label>
+                              <input type="text" class="form-control col-md-8" id="firstNameChange">
+                            </div>
+                            <div class="form-group col-md-12">
+                              <label for="lastNameChange" class="col-md-4">Last Name</label>
+                              <input type="text" class="form-control col-md-8" id="lastNameChange">
+                            </div>
+                            <div class="form-group col-md-12">
+                              <label for="ageChange" class="col-md-4">Age</label>
+                              <input type="text" class="form-control col-md-8" id="ageChange">
+                            </div>
+                            <div class="form-group col-md-12">
+                              <label for="genderChange" class="col-md-4">Gender</label>
+                              <input type="text" class="form-control col-md-8" id="genderChange">
+                            </div>
+                            <div class="form-group col-md-12">
+                              <label for="descriptionChange" class="col-md-4">Description</label>
+                              <!-- <input type="text" class="form-control" id="descriptionChange"> -->
+                              <textarea id="descriptionChange" form="editProfile" class="col-md-8"></textarea>
+                            </div>
+                            <button type="button" id="submitChanges" class="btn btn-success btn-block" onclick="updateProfile()">Submit</button>
+                          </form>
+                        </div>
+                      </div>
                     </div>
-                    <div class="form-group">
-                      <label for="lastNameChange">Last Name</label>
-                      <input type="text" class="form-control" id="lastNameChange">
-                    </div>
-                    <div class="form-group">
-                      <label for="ageChange">Age</label>
-                      <input type="text" class="form-control" id="ageChange">
-                    </div>
-                    <div class="form-group">
-                      <label for="genderChange">Gender</label>
-                      <input type="text" class="form-control" id="genderChange">
-                    </div>
-                    <div class="form-group">
-                      <label for="descriptionChange">Description</label>
-                      <input type="text" class="form-control" id="descriptionChange">
-                    </div>
-                    <button type="button" class="btn btn-primary" onclick="updateProfile()">Submit</button>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>

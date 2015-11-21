@@ -121,24 +121,7 @@ function updateProfile($userID, $firstName, $lastName, $age, $gender, $descripti
                       ":description" => $description));
 }
 
-function checkForGuest($userID, $firstName, $lastName, $age, $gender, $description){
-  global $con;
-  $sql = "SELECT userID FROM profile WHERE firstName = :firstName, lastName = :lastName, age = :age, gender = :gender, description = :description";
-  $q = $con -> prepare($sql);
-  $q -> execute(array(":firstName" => $firstName,
-                      ":lastName" => $lastName,
-                      ":age" => $age,
-                      ":gender" => $gender,
-                      ":description" => $description));
-  $data = $q -> fetchAll();
-  if ($data[0]['userID'] == $userID){
-    return true;
-  }
-  else{
-    return false;
-  }
-}
-function getProfileInformation($userID){
+function getProfileInformation($userID) {
   global $con;
   $sql = "SELECT firstName, lastName, age, gender, description FROM profile WHERE userID = :userID";
   $q = $con -> prepare($sql);
@@ -146,9 +129,8 @@ function getProfileInformation($userID){
   $data = $q -> fetchAll();
   if(count($data) == 0){
     return 0;
-  }else{
+  }else {
     return $data;  
   }
-  
 }
 ?>

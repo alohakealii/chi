@@ -8,11 +8,9 @@
   background-color: #284c79;
   color: rgb(136, 172, 217);
 }
-
-#profile {
-	text-align: center;
+textarea {
+   resize: none;
 }
-
 .card .header-bg {
   	/* This stretches the canvas across the entire hero unit */
   	position: absolute;
