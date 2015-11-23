@@ -22,15 +22,52 @@ function addAvailability($userID, $day, $time) {
   }
 }
 
+function addRequest($userID, $targetID, $daySlot) {
+  global $con;
+  $sql = "INSERT INTO request(senderID, receiverID, dayslot) VALUES (:userID, :targetID, :daySlot)";
+  $q = $con -> prepare ($sql);
+  try {
+  $q -> execute(array(':userID' => $userID,
+                      ':targetID' => $targetID,
+                      ':daySlot' => $daySlot));
+  return true;
+  }
+  catch (PDOException $e) {
+    return false;
+  }
+}
+
 function getMatch($userID) {
   global $con;
   $sql = "
-    SELECT firstName, lastName, availability.userID, availability.day, availability.slot 
+    SELECT DISTINCT firstName, lastName, profile.userID
     FROM profile, availability, (SELECT * FROM availability WHERE userid = :userID) as a
     WHERE availability.day = a.day AND availability.slot = a.slot AND availability.userid != :userID AND profile.userID = availability.userID
   ";
   $q = $con -> prepare($sql);
   $q -> execute(array(":userID" => $userID));
+  $rows = $q -> fetchAll();
+  if (count($rows) == 0) {
+    return 0;
+  }
+  else {
+    return $rows;
+  }
+}
+
+// gets the matching day and slot given two user ids
+function getMatchAvailability($userID, $targetID) {
+  global $con;
+  $sql = "
+    SELECT availability.day, availability.slot
+    FROM availability, (SELECT availability.day, availability.slot FROM availability WHERE userid = :userID) as a
+    WHERE availability.userID = :targetID
+    AND availability.day = a.day
+    AND availability.slot = a.slot
+  ";
+  $q = $con -> prepare($sql);
+  $q -> execute(array(":userID" => $userID,
+                      ":targetID" => $targetID));
   $rows = $q -> fetchAll();
   if (count($rows) == 0) {
     return 0;
@@ -80,11 +117,35 @@ function removeAvailability($userID, $day, $time) {
   return $status;
 }
 
+function pendingCount($userID) {
+  global $con;
+  $sql = "SELECT * FROM request WHERE receiverID = :userID AND status = 'Pending'";
+  $q = $con -> prepare($sql);
+  $q -> execute(array(':userID' => $userID));
+  $rows = $q -> fetchAll();
+  return count($rows);
+}
+
 function retrieveAvailability($userID) {
   global $con;
   $sql = "SELECT day, slot FROM availability WHERE userID = :userID ORDER BY FIELD(day, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')";
   $q = $con -> prepare($sql);
   $q -> execute(array(':userID' => $userID));
+  $rows = $q -> fetchAll();
+  if (count($rows) == 0) {
+    return 0;
+  }
+  else {
+    return $rows;
+  }
+}
+
+function retrieveStatus($userID, $targetID) {
+  global $con;
+  $sql = "SELECT dayslot, status FROM request WHERE senderID = :userID AND receiverID = :targetID";
+  $q = $con -> prepare($sql);
+  $q -> execute(array(':userID' => $userID,
+                      ':targetID' => $targetID));
   $rows = $q -> fetchAll();
   if (count($rows) == 0) {
     return 0;

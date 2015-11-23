@@ -39,12 +39,15 @@ session_start();
         <!-- Main component for a primary marketing message or call to action -->
         <div class="jumbotron">
           <div>
-            <h1>Match</h1>
-            <p>Find someone to eat lunch with!</p>
+            <h1>Pending requests</h1>
+            <p>Accept or deny requests</p>
           </div>
-
-          <div id="matchInput">
-            <button class="btn btn-success" onclick="match()">Match me</button>
+          <div id="requestList">
+          <div class="col-xs-3"><button class="btn btn-block disabled">sample name</button></div>
+          <div class="col-xs-3"><button class="btn btn-block disabled">monday 10-30 - 11:45</button></div>
+                <div class="col-xs-2"><button class="btn btn-block disabled">pending</button></div>
+                <div class="col-xs-2"><button class="btn btn-block disabled"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button></div>
+                <div class="col-xs-2"><button class="btn btn-block disabled"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></div>
           </div>
         </div>
 
@@ -56,8 +59,8 @@ session_start();
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="gridSystemModalLabel">Availability</h4>
               </div>
-              <div class="modal-body" id="schedule">
-                
+              <div class="modal-body">
+
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -66,19 +69,10 @@ session_start();
           </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
         
-        <div class="container marketing">
-          <!-- Three columns of matches -->
-          <div class="row" id="matchList">
-          </div><!-- /.row -->
-        </div>
 
       </div> <!-- /container -->
 
-    <!-- to be continued...
-    <div class="footer" style="text-align:center">
-      <a href="#">About</a>
-      </div>
-    </div> -->
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

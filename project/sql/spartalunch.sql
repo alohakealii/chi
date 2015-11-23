@@ -1,3 +1,5 @@
+CREATE DATABASE  IF NOT EXISTS `spartalunch` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `spartalunch`;
 -- MySQL dump 10.13  Distrib 5.6.24, for Win64 (x86_64)
 --
 -- Host: 127.0.0.1    Database: spartalunch
@@ -103,7 +105,7 @@ CREATE TABLE `login` (
   `password` varchar(45) NOT NULL,
   PRIMARY KEY (`userID`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -142,6 +144,35 @@ LOCK TABLES `profile` WRITE;
 /*!40000 ALTER TABLE `profile` DISABLE KEYS */;
 /*!40000 ALTER TABLE `profile` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `request`
+--
+
+DROP TABLE IF EXISTS `request`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `request` (
+  `senderID` int(11) NOT NULL,
+  `receiverID` int(11) NOT NULL,
+  `dayslot` varchar(45) NOT NULL,
+  `comment` varchar(45) DEFAULT 'Pending',
+  `status` varchar(45) DEFAULT 'Pending',
+  PRIMARY KEY (`senderID`,`receiverID`,`dayslot`),
+  KEY `availability_receiverID_idx` (`receiverID`),
+  CONSTRAINT `availability_receiverID` FOREIGN KEY (`receiverID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `availability_senderID` FOREIGN KEY (`senderID`) REFERENCES `login` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `request`
+--
+
+LOCK TABLES `request` WRITE;
+/*!40000 ALTER TABLE `request` DISABLE KEYS */;
+/*!40000 ALTER TABLE `request` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -152,4 +183,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-14 17:37:51
+-- Dump completed on 2015-11-22 21:10:18
