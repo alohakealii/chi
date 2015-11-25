@@ -68,5 +68,10 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
     <script src="js/spartalunch.js"></script>
+    
+    <!-- Session Check -->
+    <script src="js/sessionCheck.js"></script>
+    <script>window.onload=checkSession();</script>
+
   </body>
 </html>

@@ -1,13 +1,13 @@
 $(document).ready(function() {
 
-	$.get('../php/session_check.php', function(data) {
-		if (data.indexOf("active") != -1) {
-			$("nav").load("../parts/userheader.php");
+  $.get('php/session_check.php', function(data) {
+    if (data.indexOf("active") != -1) {
+      $("nav").load("parts/userheader.php");z
     }
-		else {
-			$("nav").load("../parts/anonheader.html");
+    else {
+      $("nav").load("parts/anonheader.html");
     }
-	});
+  });
 });
 
 function register() {
@@ -38,7 +38,7 @@ function login() {
 
   $.ajax({
     type: "POST",
-    url: "php/verifyLogin.php",
+    url: "php/setSession.php",
     data: {username: username, password: password},
     success: function (data) {
       if (data == true) {
