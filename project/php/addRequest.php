@@ -4,6 +4,11 @@
   $userID = $_SESSION["userID"];
   $targetID = $_POST["targetID"];
   $daySlot = $_POST["daySlot"];
-  $status = addRequest($userID, $targetID, $daySlot);
-  echo $status;
+  if (verifyRequest($userID, $targetID, $daySlot) == false) {
+    $status = addRequest($userID, $targetID, $daySlot);
+    echo $status;
+  }
+  else {
+    echo false;
+  }
 ?>

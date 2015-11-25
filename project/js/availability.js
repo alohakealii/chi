@@ -24,16 +24,18 @@ function addAvailability() {
     alert("Please select a day or time");
   }
   else {
+    var dayslot = day + " " + time;
     $.ajax({
       type: "POST",
       url: "php/addAvailability.php",
-      data: {day: day, time: time},
+      data: {dayslot: dayslot},
       success: function (data) {
         if (data == true) {
-          var button = createAvailabilityBtn((day + " " + time), "danger", 1);
+          var button = createAvailabilityBtn(dayslot, "danger", 1);
           $('#availabilityList').append(button);
         }
         else {
+          console.log(data);
           alert("error");
         } 
       },
@@ -50,16 +52,17 @@ function removeAvailability(id) {
     var button = $(this);
     // use reg exp to split button text into parameters for ajax call
     var dateText = button.text();
-    var dateRE = new RegExp(/([a-zA-Z]*)\s([0-9]*:[0-9]*\s-\s[0-9]*:[0-9]*)/);
-    var split = dateRE.exec(dateText);
-    var day = RegExp.$1;
-    var time = RegExp.$2;
+    // var dateRE = new RegExp(/([a-zA-Z]*)\s([0-9]*:[0-9]*\s-\s[0-9]*:[0-9]*)/);
+    // var split = dateRE.exec(dateText);
+    // var day = RegExp.$1;
+    // var time = RegExp.$2;
 
     // delete availability from database and remove from view on success
     $.ajax({
       type: "POST",
       url: "php/removeAvailability.php",
-      data: {day: day, time: time},
+      // data: {day: day, time: time},
+      data: {dayslot: dateText},
       success: function (data) {
         if (data == true) {
           button.parent().addClass("animated bounceOutDown");
@@ -92,20 +95,21 @@ function retrieveAvailability() {
     }).responseText;
 
     if (response != 0) {
+      var btnArr = [];
       var availabilityArray = JSON.parse(response);
       for (i = 0; i < availabilityArray.length; i++) {
-        var button = createAvailabilityBtn((availabilityArray[i]["day"] + " " + availabilityArray[i]["slot"]), "danger", 1);
+        var button = createAvailabilityBtn((availabilityArray[i]["dayslot"]), "danger", 1);
+        btnArr.push(button);
+      }
 
-        // no delay on adding the first element
-        if (i == 0) {
-          $('#availabilityList').append(button);
-        }
-        else {
-          $('#availabilityList').delay(100).queue(function(next) {
-            $(this).append(button);
+      $('#availabilityList').append(btnArr.pop()); // pop first element with no delay
+      for (i = 0; i < btnArr.length; i++) {
+        $('#availabilityList').delay(100).queue(function(next) {
+            $(this).append(btnArr.pop()); // append next element after 250 ms delay
+            // scroll to bottom of page each time element is added, has unncessary calls but it works for now
+            // $("html, body").animate({ scrollTop: $(document).height() }, "fast");
             next();
-          });
-        }
+        });
       }
     }
 }

@@ -24,6 +24,15 @@
       <ul class="dropdown-menu" id="pendingList">
       </ul>
     </li> -->
+
+    <li class="dropdown" id="notifications-dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+        Notifications <span class="badge" id="notification-count">0</span>
+      </a>
+      <ul class="dropdown-menu" id="notifications">
+      </ul>
+    </li>
+
     <li><a href="match.php">Match</a></li>
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION["firstName"]?><span class="caret"></span></a>
@@ -40,4 +49,5 @@
 </div><!--/.nav-collapse -->
 </div><!--/.container-fluid -->
 
-<script src="../js/navbarRequest.js"></script>
+<script src="../js/notification.js"></script>
+<!-- <link href="css/animate.css" rel="stylesheet"> -->

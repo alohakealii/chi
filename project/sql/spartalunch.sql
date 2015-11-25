@@ -26,10 +26,12 @@ DROP TABLE IF EXISTS `availability`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `availability` (
   `userID` int(11) NOT NULL,
-  `day` varchar(45) NOT NULL DEFAULT '',
-  `slot` varchar(45) NOT NULL DEFAULT '',
-  PRIMARY KEY (`userID`,`day`,`slot`),
+  `day` varchar(45) DEFAULT '',
+  `slot` varchar(45) DEFAULT '',
+  `dayslot` varchar(45) NOT NULL,
+  PRIMARY KEY (`userID`,`dayslot`),
   KEY `availability_userID_idx` (`userID`),
+  KEY `availability_dayslot_idx` (`dayslot`),
   CONSTRAINT `availability_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -41,31 +43,6 @@ CREATE TABLE `availability` (
 LOCK TABLES `availability` WRITE;
 /*!40000 ALTER TABLE `availability` DISABLE KEYS */;
 /*!40000 ALTER TABLE `availability` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `contact`
---
-
-DROP TABLE IF EXISTS `contact`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `contact` (
-  `userID` int(11) NOT NULL,
-  `email` varchar(45) DEFAULT NULL,
-  `phone` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`userID`),
-  CONSTRAINT `contact_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `contact`
---
-
-LOCK TABLES `contact` WRITE;
-/*!40000 ALTER TABLE `contact` DISABLE KEYS */;
-/*!40000 ALTER TABLE `contact` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -105,7 +82,7 @@ CREATE TABLE `login` (
   `password` varchar(45) NOT NULL,
   PRIMARY KEY (`userID`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +91,38 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
+INSERT INTO `login` VALUES (9,'mlamb','mlamb'),(10,'tcruise','tcruise'),(11,'dkong','dkong'),(12,'cbrown','crown');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `notification`
+--
+
+DROP TABLE IF EXISTS `notification`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `notification` (
+  `senderID` int(11) NOT NULL,
+  `receiverID` int(11) DEFAULT NULL,
+  `action` varchar(45) DEFAULT NULL,
+  `dayslot` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`senderID`),
+  KEY `notification_dayslot_idx` (`dayslot`),
+  KEY `notification_receiverID_idx` (`receiverID`),
+  CONSTRAINT `notification_dayslot` FOREIGN KEY (`dayslot`) REFERENCES `availability` (`dayslot`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `notification_receiverID` FOREIGN KEY (`receiverID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `notification_senderID` FOREIGN KEY (`senderID`) REFERENCES `login` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `notification`
+--
+
+LOCK TABLES `notification` WRITE;
+/*!40000 ALTER TABLE `notification` DISABLE KEYS */;
+/*!40000 ALTER TABLE `notification` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -160,8 +168,10 @@ CREATE TABLE `request` (
   `status` varchar(45) DEFAULT 'Pending',
   PRIMARY KEY (`senderID`,`receiverID`,`dayslot`),
   KEY `availability_receiverID_idx` (`receiverID`),
-  CONSTRAINT `availability_receiverID` FOREIGN KEY (`receiverID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `availability_senderID` FOREIGN KEY (`senderID`) REFERENCES `login` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  KEY `request_dayslot_idx` (`dayslot`),
+  CONSTRAINT `request_dayslot` FOREIGN KEY (`dayslot`) REFERENCES `availability` (`dayslot`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `request_receiverID` FOREIGN KEY (`receiverID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `request_senderID` FOREIGN KEY (`senderID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -183,4 +193,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-22 21:10:18
+-- Dump completed on 2015-11-25  2:54:07

@@ -7,14 +7,59 @@ try {
   echo "<p>Connection to database failed</p>";
 }
 
-function addAvailability($userID, $day, $time) {
+function acceptRequest($senderID, $receiverID, $dayslot) {
   global $con;
-  $sql = "INSERT INTO availability(userID, day, slot) VALUES (:userID, :day, :time)";
+  $sql = "UPDATE request SET status = 'Accepted' where senderID = :senderID AND receiverID = :receiverID AND dayslot = :dayslot";
+  $q = $con -> prepare ($sql);
+  try {
+    $q -> execute(array(':senderID' => $senderID,
+                        ':receiverID' => $receiverID,
+                        ':dayslot' => $dayslot));
+    return true;
+  }
+  catch (PDOException $e) {
+    return false;
+  }
+}
+
+// function addAvailability($userID, $day, $time) {
+//   global $con;
+//   $sql = "INSERT INTO availability(userID, day, slot) VALUES (:userID, :day, :time)";
+//   $q = $con -> prepare ($sql);
+//   try {
+//   $q -> execute(array(':userID' => $userID,
+//                       ':day' => $day,
+//                       ':time' => $time));
+//   return true;
+//   }
+//   catch (PDOException $e) {
+//     return false;
+//   }
+// }
+
+function addAvailability($userID, $dayslot) {
+  global $con;
+  $sql = "INSERT INTO availability(userID, dayslot) VALUES (:userID, :dayslot)";
   $q = $con -> prepare ($sql);
   try {
   $q -> execute(array(':userID' => $userID,
-                      ':day' => $day,
-                      ':time' => $time));
+                      ':dayslot' => $dayslot));
+  return true;
+  }
+  catch (PDOException $e) {
+    return false;
+  }
+}
+
+function addNotification($senderID, $receiverID, $action, $dayslot) {
+  global $con;
+  $sql = "INSERT INTO notification(senderID, receiverID, action, dayslot) VALUES (:senderID, :receiverID, :action, :dayslot)";
+  $q = $con -> prepare ($sql);
+  try {
+  $q -> execute(array(':senderID' => $senderID,
+                      ':receiverID' => $receiverID,
+                      ':action' => $action,
+                      ':dayslot' => $dayslot));
   return true;
   }
   catch (PDOException $e) {
@@ -31,6 +76,30 @@ function addRequest($userID, $targetID, $daySlot) {
                       ':targetID' => $targetID,
                       ':daySlot' => $daySlot));
   return true;
+  }
+  catch (PDOException $e) {
+    return false;
+  }
+}
+
+function countPending($userID) {
+  global $con;
+  $sql = "SELECT * FROM request WHERE receiverID = :userID AND status = 'Pending'";
+  $q = $con -> prepare($sql);
+  $q -> execute(array(':userID' => $userID));
+  $rows = $q -> fetchAll();
+  return count($rows);
+}
+
+function denyRequest($senderID, $receiverID, $dayslot) {
+  global $con;
+  $sql = "UPDATE request SET status = 'Denied' where senderID = :senderID AND receiverID = :receiverID AND dayslot = :dayslot";
+  $q = $con -> prepare ($sql);
+  try {
+    $q -> execute(array(':senderID' => $senderID,
+                        ':receiverID' => $receiverID,
+                        ':dayslot' => $dayslot));
+    return true;
   }
   catch (PDOException $e) {
     return false;
@@ -59,11 +128,10 @@ function getMatch($userID) {
 function getMatchAvailability($userID, $targetID) {
   global $con;
   $sql = "
-    SELECT availability.day, availability.slot
-    FROM availability, (SELECT availability.day, availability.slot FROM availability WHERE userid = :userID) as a
+    SELECT availability.dayslot
+    FROM availability, (SELECT availability.dayslot FROM availability WHERE userid = :userID) as a
     WHERE availability.userID = :targetID
-    AND availability.day = a.day
-    AND availability.slot = a.slot
+    AND availability.dayslot = a.dayslot
   ";
   $q = $con -> prepare($sql);
   $q -> execute(array(":userID" => $userID,
@@ -106,29 +174,69 @@ function insertProfile($id, $firstName, $lastName) {
                       ':lastName' => $lastName));
 }
 
-function removeAvailability($userID, $day, $time) {
+function removeAvailability($userID, $dayslot) {
   global $con;
-  $sql = "DELETE FROM availability WHERE userID = :userID AND day = :day AND slot = :time";
+  $sql = "DELETE FROM availability WHERE userID = :userID AND dayslot = :dayslot";
   $q = $con -> prepare($sql);
   $q -> execute(array(':userID' => $userID,
-                      ':day' => $day,
-                      ':time' => $time));
+                      ':dayslot' => $dayslot));
   $status = $q -> rowCount();
   return $status;
 }
 
-function pendingCount($userID) {
+// retrieves users who accepted requests from param $userID
+function retrieveAccepted($userID) {
   global $con;
-  $sql = "SELECT * FROM request WHERE receiverID = :userID AND status = 'Pending'";
+  $sql = "SELECT receiverID, firstName, lastName, dayslot, status
+          FROM profile, (SELECT receiverID, dayslot, status FROM request WHERE senderID = :userID AND status = 'Accepted') AS request
+          WHERE profile.userID = request.receiverID";
   $q = $con -> prepare($sql);
   $q -> execute(array(':userID' => $userID));
   $rows = $q -> fetchAll();
-  return count($rows);
+  if (count($rows) == 0) {
+    return 0;
+  }
+  else {
+    return $rows;
+  }
 }
 
 function retrieveAvailability($userID) {
   global $con;
-  $sql = "SELECT day, slot FROM availability WHERE userID = :userID ORDER BY FIELD(day, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')";
+  $sql = "SELECT dayslot FROM availability WHERE userID = :userID ORDER BY FIELD(dayslot, 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')";
+  $q = $con -> prepare($sql);
+  $q -> execute(array(':userID' => $userID));
+  $rows = $q -> fetchAll();
+  if (count($rows) == 0) {
+    return 0;
+  }
+  else {
+    return $rows;
+  }
+}
+
+function retrieveNotification($userID) {
+  global $con;
+  $sql = "SELECT firstName, lastName, notification.dayslot, action
+          FROM notification, profile
+          WHERE notification.senderID = profile.userID AND notification.receiverID = :userID;";
+  $q = $con -> prepare($sql);
+  $q -> execute(array(':userID' => $userID));
+  $rows = $q -> fetchAll();
+  if (count($rows) == 0) {
+    return 0;
+  }
+  else {
+    return $rows;
+  }
+}
+
+// retrieves pending requests and requests accepted by param $userID
+function retrievePending($userID) {
+  global $con;
+  $sql = "SELECT senderID, firstName, lastName, dayslot, status
+          FROM profile, (SELECT senderID, dayslot, status FROM request WHERE receiverID = :userID AND (status = 'Pending' OR status = 'Accepted')) AS request
+          WHERE profile.userID = request.senderID";
   $q = $con -> prepare($sql);
   $q -> execute(array(':userID' => $userID));
   $rows = $q -> fetchAll();
@@ -142,7 +250,7 @@ function retrieveAvailability($userID) {
 
 function retrieveStatus($userID, $targetID) {
   global $con;
-  $sql = "SELECT dayslot, status FROM request WHERE senderID = :userID AND receiverID = :targetID";
+  $sql = "SELECT dayslot, status FROM request WHERE (senderID = :userID AND receiverID = :targetID) OR (senderID = :targetID AND receiverID = :userID)";
   $q = $con -> prepare($sql);
   $q -> execute(array(':userID' => $userID,
                       ':targetID' => $targetID));
@@ -167,6 +275,21 @@ function verifyLogin($username, $password) {
   }
   else {
     return false;
+  }
+}
+
+function verifyRequest($user1, $user2, $dayslot) {
+  global $con;
+  $sql = "SELECT * FROM request WHERE senderID = :user2 AND receiverID = :user1";
+  $q = $con -> prepare($sql);
+  $q -> execute(array(":user2" => $user2,
+                      ":user1" => $user1));
+  $rows = $q -> fetchAll(PDO::FETCH_ASSOC);
+  if (count($rows) == 0) {
+    return false;
+  }
+  else {
+    return true;
   }
 }
 

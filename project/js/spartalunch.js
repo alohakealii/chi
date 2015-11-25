@@ -83,12 +83,10 @@ function match() {
       var matchesHTML = [];
       for (i = 0; i < matches.length; i++) {
         var elem = matches[i];
-        var html = "<p>" + elem["firstName"] + " " + elem["lastName"] + " " + elem["day"] + " " + elem["slot"] + "</p>";
-        html = '<div id="matchElem" class="col-lg-4 animated bounceIn">' +
+        var html = '<div class="col-lg-4 animated bounceIn">' +
           '<img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">' +
           '<h2>' + elem["firstName"] + ' ' + elem["lastName"] + '</h2>' +
           '<p>Donec sed odio dui. Etiam porta sem malesuada magna mollis euismod. Nullam id dolor id nibh ultricies vehicula ut id elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Praesent commodo cursus magna.</p>' +
-          // '<p><a class="btn btn-default" onclick="matchDetails(' + elem["userID"] + ')" role="button">View details &raquo;</a></p>' +
           '<button type="button" class="btn btn-primary" onclick="matchDetails(' + elem["userID"] + ')" data-toggle="modal" data-target=".bs-example-modal-lg">Details</button>' +
         '</div>';
         matchesHTML.push(html);
@@ -130,7 +128,7 @@ function matchDetails(targetID) {
       // create and append the request button and (empty) status rows
       var availSlots = JSON.parse(response);
       for (i = 0; i < availSlots.length; i++) {
-        var elem = availSlots[i]["day"] + " " + availSlots[i]["slot"];
+        var elem = availSlots[i]["dayslot"];
         var id = createSlotID(elem);
         var btn = createAvailabilityBtn(elem, targetID); // creates button for sending requests
         var html = '<div class="row">' +
@@ -172,10 +170,6 @@ function register() {
     });   
 }
 
-function retrievePending() {
-
-}
-
 function retrieveStatus(targetID) {
   var response = $.ajax({
     type: "POST",
@@ -203,7 +197,7 @@ function sendRequest(targetID, availabilityString) {
         $('#'+id).html("Pending");
       }
       else {
-        alert("Request failed: requests can only be sent once per slot for this user");
+        alert("Request failed: request is pending or already accepted");
       }
     }
   });

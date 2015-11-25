@@ -1,6 +1,6 @@
 <?php
 session_start();
 require "pdo.php";
-$rows = pendingCount($_SESSION["userID"]);
+$rows = countPending($_SESSION["userID"]);
 echo $rows;
 ?>

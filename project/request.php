@@ -39,16 +39,16 @@ session_start();
         <!-- Main component for a primary marketing message or call to action -->
         <div class="jumbotron">
           <div>
-            <h1>Pending requests</h1>
-            <p>Accept or deny requests</p>
+            <h1>Requests</h1>
+            <p>Accept, deny, or view requests</p>
           </div>
-          <div id="requestList">
-          <div class="col-xs-3"><button class="btn btn-block disabled">sample name</button></div>
-          <div class="col-xs-3"><button class="btn btn-block disabled">monday 10-30 - 11:45</button></div>
-                <div class="col-xs-2"><button class="btn btn-block disabled">pending</button></div>
-                <div class="col-xs-2"><button class="btn btn-block disabled"><span class="glyphicon glyphicon-ok" aria-hidden="true"></span></button></div>
-                <div class="col-xs-2"><button class="btn btn-block disabled"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></div>
-          </div>
+        </div>
+
+        <div class="container marketing">
+          <!-- Three columns of matches -->
+          <div class="row" id="pendingList">
+            
+          </div><!-- /.row -->
         </div>
 
         <!-- Large modal -->
@@ -82,5 +82,6 @@ session_start();
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
     <script src="js/spartalunch.js"></script>
+    <script src="js/request.js"></script>
   </body>
   </html>
