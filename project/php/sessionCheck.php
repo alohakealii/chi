@@ -9,5 +9,4 @@ else {
     echo 'active'.$_SESSION["firstName"];
     // echo true;
 }
-
 ?>

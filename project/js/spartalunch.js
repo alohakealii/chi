@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-  $.get('php/session_check.php', function(data) {
+  $.get('php/sessionCheck.php', function(data) {
     if (data.indexOf("active") != -1) {
       $("nav").load("parts/userheader.php");z
     }

@@ -15,13 +15,13 @@ function checkSession() {
   // alert("Check session");
   $.ajax({
     type: "POST",
-    url: "php/session_check.php",
+    url: "php/sessionCheck.php",
     success: function (data) {
       if (data.indexOf("active") == -1) {
         alert("Restricted page: please log in to access")
-        window.location = '/project/';
+        window.location = '/project/login.php';
       } else {
-        alert("Logged in page");
+        // alert("Logged in page");
       }
     }
   });
