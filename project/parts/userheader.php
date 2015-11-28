@@ -7,7 +7,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/chi/project/">spartalunch</a>
+            <a class="navbar-brand" href="/project/">spartalunch</a>
           </div>
           <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
@@ -21,7 +21,7 @@
                 <ul class="dropdown-menu">
                   <li><a href="availability.php">Availability</a></li>
                   <li><a href="#">Interests</a></li>
-                  <li><a href="#">Profile</a></li>
+                  <li><a href="profile.php">Profile</a></li>
                   <li role="separator" class="divider"></li>
                   <!-- <li class="dropdown-header">Nav header</li> -->
                   <li><a onclick="logout()">Log out</a></li>
