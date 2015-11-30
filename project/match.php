@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+<?php require 'php/authenticate.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">

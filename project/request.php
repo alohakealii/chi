@@ -1,6 +1,4 @@
-<?php
-session_start();
-?>
+<?php require 'php/authenticate.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -68,11 +66,7 @@ session_start();
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-        
-
       </div> <!-- /container -->
-
-
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

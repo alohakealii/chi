@@ -53,9 +53,9 @@ function addAvailability($userID, $dayslot) {
 
 function addNotification($senderID, $receiverID, $action, $dayslot) {
   global $con;
+  try {
   $sql = "INSERT INTO notification(senderID, receiverID, action, dayslot) VALUES (:senderID, :receiverID, :action, :dayslot)";
   $q = $con -> prepare ($sql);
-  try {
   $q -> execute(array(':senderID' => $senderID,
                       ':receiverID' => $receiverID,
                       ':action' => $action,
@@ -63,6 +63,15 @@ function addNotification($senderID, $receiverID, $action, $dayslot) {
   return true;
   }
   catch (PDOException $e) {
+    $sql = "UPDATE notification SET action = :action WHERE senderID = :senderID AND receiverID = :receiverID AND dayslot = :dayslot";
+    $q = $con -> prepare ($sql);
+    $q -> execute(array(':senderID' => $senderID,
+                        ':receiverID' => $receiverID,
+                        ':action' => $action,
+                        ':dayslot' => $dayslot));
+    return true;
+  }
+  catch (Exception $e) {
     return false;
   }
 }
@@ -103,6 +112,20 @@ function denyRequest($senderID, $receiverID, $dayslot) {
   }
   catch (PDOException $e) {
     return false;
+  }
+}
+
+function getEmail($userID) {
+  global $con;
+  $sql = "SELECT email FROM profile WHERE userID = :userID";
+  $q = $con -> prepare($sql);
+  $q -> execute(array(":userID" => $userID));
+  $rows = $q -> fetchAll();
+  if (count($rows) == 1) {
+    return $rows;
+  }
+  else {
+    return 0;
   }
 }
 
@@ -158,20 +181,27 @@ function insertAccount($username, $password) {
   global $con;
   $sql = "INSERT INTO login(username, password) VALUES (:username, :password)";
   $q = $con -> prepare($sql);
-  $q -> execute(array(':username' => $username,
-                      ':password' => $password));
+  try {
+    $q -> execute(array(':username' => $username,
+                        ':password' => $password));
+    $id = $con -> lastInsertId();
+    return $id;
+  }
+  catch (PDOException $e) {
+    return false;
+  }
 
-  $id = $con -> lastInsertId();
-  return $id;
+  
 }
 
-function insertProfile($id, $firstName, $lastName) {
+function insertProfile($id, $firstName, $lastName, $email) {
   global $con;
-  $sql = "INSERT INTO profile(userID, firstName, lastName) VALUES(:id, :firstName, :lastName)";
+  $sql = "INSERT INTO profile(userID, firstName, lastName, email) VALUES(:id, :firstName, :lastName, :email)";
   $q = $con -> prepare($sql);
   $q -> execute(array(':id' => $id,
                       ':firstName' => $firstName,
-                      ':lastName' => $lastName));
+                      ':lastName' => $lastName,
+                      ':email' => $email));
 }
 
 function removeAvailability($userID, $dayslot) {
@@ -187,7 +217,7 @@ function removeAvailability($userID, $dayslot) {
 // retrieves users who accepted requests from param $userID
 function retrieveAccepted($userID) {
   global $con;
-  $sql = "SELECT receiverID, firstName, lastName, dayslot, status
+  $sql = "SELECT receiverID, firstName, lastName, dayslot, status, email
           FROM profile, (SELECT receiverID, dayslot, status FROM request WHERE senderID = :userID AND status = 'Accepted') AS request
           WHERE profile.userID = request.receiverID";
   $q = $con -> prepare($sql);
@@ -234,7 +264,7 @@ function retrieveNotification($userID) {
 // retrieves pending requests and requests accepted by param $userID
 function retrievePending($userID) {
   global $con;
-  $sql = "SELECT senderID, firstName, lastName, dayslot, status
+  $sql = "SELECT senderID, firstName, lastName, email, dayslot, status
           FROM profile, (SELECT senderID, dayslot, status FROM request WHERE receiverID = :userID AND (status = 'Pending' OR status = 'Accepted')) AS request
           WHERE profile.userID = request.senderID";
   $q = $con -> prepare($sql);

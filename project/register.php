@@ -56,6 +56,10 @@
             <label for="password">Password</label>
             <input type="password" class="form-control" id="password" placeholder="Password">
           </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="text" class="form-control" id="email" placeholder="Email">
+          </div>
           <button type="button" class="btn btn-primary" onclick="register()">Submit</button>
         </form>
 

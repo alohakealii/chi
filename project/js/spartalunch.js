@@ -9,10 +9,6 @@ $(document).ready(function() {
   });
 });
 
-function test() {
-  alert("test");
-}
-
 function createAvailabilityBtn(availabilityString, requestID) {
   var formatID = createSlotID(availabilityString);
   var param = "'" + formatID + "'";
@@ -153,19 +149,23 @@ function register() {
     var last = document.getElementById('lastName').value;
     var username = document.getElementById('username').value;
     var password = document.getElementById('password').value;
+    var email = document.getElementById('email').value;
 
     $.ajax({
         type: "POST",
         url: "php/registerAccount.php",
-        data: {firstName: first, lastName: last, username: username, password: password},
+        data: {firstName: first, lastName: last, username: username, password: password, email: email},
         success: function (data) {
+          if (data != false) {
             alert("Registration successful!");
-            //document.location.href = "index.html";
             window.location = 'login.php';
+          }
+          else {
+            alert("Error: username is taken");
+          }
         },
         error: function(data) {
             alert("There was an error");
-            console.log(data);
         }
     });   
 }
@@ -197,7 +197,7 @@ function sendRequest(targetID, availabilityString) {
         $('#'+id).html("Pending");
       }
       else {
-        alert("Request failed: request is pending or already accepted");
+        alert("Request failed: request is pending, accepted, or denied");
       }
     }
   });

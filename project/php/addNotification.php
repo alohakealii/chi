@@ -1,9 +1,10 @@
 <?php
   session_start();
   require "pdo.php";
-  $userID = $_SESSION["userID"];
-  $receiverID = $_POST["userID"];
+  $senderID = $_SESSION["userID"];
+  $receiverID = $_POST["receiverID"];
   $daySlot = $_POST["dayslot"];
-  $status = addNotification($userID, $receiverID, 'accepted', $daySlot);
+  $action = $_POST["action"];
+  $status = addNotification($senderID, $receiverID, $action, $daySlot);
   echo $status;
 ?>

@@ -4,7 +4,6 @@ $(document).ready(function() {
   var totalCount = pendingCount;
 
   if (notifications != 0) {
-    console.log(totalCount + " " + notifications.length);
     totalCount = totalCount + notifications.length;
     for (i = 0; i < notifications.length; i++) {
       var li = '<li><a>' + notifications[i] + '</a></li>';
