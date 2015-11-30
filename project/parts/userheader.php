@@ -39,7 +39,7 @@
       <ul class="dropdown-menu">
         <li><a href="availability.php">Availability</a></li>
         <li><a href="#">Interests</a></li>
-        <li><a href="#">Profile</a></li>
+        <li><a href="profile.php">Profile</a></li>
         <li role="separator" class="divider"></li>
         <!-- <li class="dropdown-header">Nav header</li> -->
         <li><a onclick="logout()">Log out</a></li>
@@ -49,6 +49,5 @@
 </div><!--/.nav-collapse -->
 </div><!--/.container-fluid -->
 
-<script src="../js/notification.js"></script>
+<script src="js/notification.js"></script>
 <!-- <link href="css/animate.css" rel="stylesheet"> -->
->>>>>>> project-start

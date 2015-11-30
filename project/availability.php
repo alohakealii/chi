@@ -132,7 +132,7 @@
     <script src="js/spartalunch.js"></script>
     <script src="js/availability.js"></script>
     <!-- Session Check -->
-    <script src="js/sessionCheck.js"></script>
-    <script>window.onload=checkSession();</script>
+    <!-- <script src="js/sessionCheck.js"></script> -->
+    <!-- <script>window.onload=checkSession();</script> -->
   </body>
 </html>
