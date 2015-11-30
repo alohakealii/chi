@@ -1,6 +1,4 @@
-<?php
-    // path to authenticate.php
-?>
+<?php require 'php/authenticate.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +11,7 @@
   <meta name="author" content="">
   <link rel="icon" href="../../favicon.ico">
 
-  <title>Navbar Template for Bootstrap</title>
+  <title>spartalunch - Profile</title>
 
   <!-- Bootstrap core CSS -->
   <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
@@ -33,7 +31,7 @@
 
     <body onload="populateProfile()">
      <div class="container">
-      <!-- Static navbar -->
+
       <nav class="navbar navbar-default">
       </nav>
 

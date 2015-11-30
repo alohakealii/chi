@@ -9,7 +9,7 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>spartalunch</title>
+    <title>spartalunch - Login</title>
 
     <!-- Bootstrap core CSS -->
     <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
@@ -30,7 +30,6 @@
 
     <div class="container">
 
-      <!-- Static navbar -->
       <nav class="navbar navbar-default">
       </nav>
 
