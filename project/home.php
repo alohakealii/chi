@@ -1,6 +1,4 @@
-<?php
-  session_start();
-?>
+<?php require 'php/authenticate.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,15 +11,12 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>Navbar Template for Bootstrap</title>
+    <title>spartalunch</title>
 
-    <!-- Bootstrap core CSS -->
-    <!-- <link href="css/bootstrap.min.css" rel="stylesheet"> -->
     <link href="css/flatly.bootstrap.min.css" rel="stylesheet">
-
-    <!-- Custom styles for this template -->
-    <link href="css/spartalunch.css" rel="stylesheet">
-
+    <link href="css/masonry.css" rel="stylesheet" type="text/css" >
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -72,11 +67,64 @@
       <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Welcome <?php echo $_SESSION["firstName"]?>!</h1>
-        <p>First, set the times that you are available</p>
-        <p>
-          <a class="btn btn-primary" href="availability.php" role="button">Availability</a>
-        </p>
+        <p>First, set the times that you are <a href="availability.php">available</a></p>
       </div>
+
+<div class="grid">
+          <div class="grid-sizer"></div>
+  
+  <div class="grid-item">
+    <img src="images/360grill.jpg" />
+  </div>
+  <div class="grid-item">
+    <img src="images/lavictorias.jpg" />
+  </div>
+  <div class="grid-item">
+    <img src="images/brickspizzapasta.jpg" />
+  </div>
+  <div class="grid-item">
+    <img src="images/tapiocaexpress.png" />
+  </div>
+  <div class="grid-item">
+    <img src="images/inthemix.jpg" />
+  </div>
+  <div class="grid-item">
+    <img src="images/amorcafetea.jpg" />
+  </div>
+  <div class="grid-item">
+    <img src="images/jambajuice.jpg" />
+  </div>
+  <div class="grid-item">
+    <img src="images/sanpedrosquare.jpg" />
+  </div>
+  <div class="grid-item">
+    <img src="images/leboulanger.jpg" />
+  </div>
+  <div class="grid-item">
+    <img src="images/mojoburger.jpg" />
+  </div>
+  <div class="grid-item">
+    <img src="images/pandaexpress.jpg" />
+  </div>
+  <div class="grid-item">
+    <img src="images/peanuts.jpg" />
+  </div>
+  <div class="grid-item">
+    <img src="images/originalgravity.jpg" />
+  </div>
+  <div class="grid-item">
+    <img src="images/philz.png" />
+  </div>
+  <div class="grid-item">
+    <img src="images/tacobell.jpg" />
+  </div>
+  <div class="grid-item">
+    <img src="images/whispers.jpg" />
+  </div>
+  <div class="grid-item">
+    <img src="images/wafflecoop.jpg" />
+  </div>
+</div>
 
     </div> <!-- /container -->
 
@@ -84,13 +132,13 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
-    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
     <script src="js/spartalunch.js"></script>
-    <!-- Session Check -->
+    <!-- Session Check
     <script src="js/sessionCheck.js"></script>
-    <script>window.onload=checkSession();</script>
+    <script>window.onload=checkSession();</script> -->
+    <script src="js/home.js"></script>
+    <script src="js/imagesloaded.pkgd.js"></script>
+    <script src="js/masonry.pkgd.min.js"></script>
   </body>
 </html>

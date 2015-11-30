@@ -2,8 +2,7 @@
   session_start();
   require "pdo.php";
   $userID = $_SESSION['userID'];
-  $day = $_POST['day'];
-  $time = $_POST['time'];
-  $status = addAvailability($userID, $day, $time);
+  $dayslot = $_POST['dayslot'];
+  $status = addAvailability($userID, $dayslot);
   echo $status;
 ?>

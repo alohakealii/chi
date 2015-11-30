@@ -16,8 +16,6 @@ $(document).ready(function() {
 
 });
 
-
-
 function addAvailability() {
   var day = $('#dropdownDay').text().trim();
   var time = $('#dropdownTime').text().trim();
@@ -26,16 +24,18 @@ function addAvailability() {
     alert("Please select a day or time");
   }
   else {
+    var dayslot = day + " " + time;
     $.ajax({
       type: "POST",
       url: "php/addAvailability.php",
-      data: {day: day, time: time},
+      data: {dayslot: dayslot},
       success: function (data) {
         if (data == true) {
-          var button = createAvailabilityBtn(day + " " + time);
+          var button = createAvailabilityBtn(dayslot, "danger", 1);
           $('#availabilityList').append(button);
         }
         else {
+          console.log(data);
           alert("error");
         } 
       },
@@ -52,16 +52,17 @@ function removeAvailability(id) {
     var button = $(this);
     // use reg exp to split button text into parameters for ajax call
     var dateText = button.text();
-    var dateRE = new RegExp(/([a-zA-Z]*)\s([0-9]*:[0-9]*\s-\s[0-9]*:[0-9]*)/);
-    var split = dateRE.exec(dateText);
-    var day = RegExp.$1;
-    var time = RegExp.$2;
+    // var dateRE = new RegExp(/([a-zA-Z]*)\s([0-9]*:[0-9]*\s-\s[0-9]*:[0-9]*)/);
+    // var split = dateRE.exec(dateText);
+    // var day = RegExp.$1;
+    // var time = RegExp.$2;
 
     // delete availability from database and remove from view on success
     $.ajax({
       type: "POST",
       url: "php/removeAvailability.php",
-      data: {day: day, time: time},
+      // data: {day: day, time: time},
+      data: {dayslot: dateText},
       success: function (data) {
         if (data == true) {
           button.parent().addClass("animated bounceOutDown");
@@ -94,33 +95,37 @@ function retrieveAvailability() {
     }).responseText;
 
     if (response != 0) {
+      var btnArr = [];
       var availabilityArray = JSON.parse(response);
       for (i = 0; i < availabilityArray.length; i++) {
-        var button = createAvailabilityBtn(availabilityArray[i]["day"] + " " + availabilityArray[i]["slot"]);
-
-        // no delay on adding the first element
-        if (i == 0) {
-          $('#availabilityList').append(button);
-        }
-        else {
-          $('#availabilityList').delay(300).queue(function(next) {
-            $(this).append(button);
-            next();
-          });
-        }
-
+        var button = createAvailabilityBtn((availabilityArray[i]["dayslot"]), "danger", 1);
+        btnArr.push(button);
       }
-      
 
+      $('#availabilityList').append(btnArr.pop()); // pop first element with no delay
+      for (i = 0; i < btnArr.length; i++) {
+        $('#availabilityList').delay(100).queue(function(next) {
+            $(this).append(btnArr.pop()); // append next element after 250 ms delay
+            // scroll to bottom of page each time element is added, has unncessary calls but it works for now
+            // $("html, body").animate({ scrollTop: $(document).height() }, "fast");
+            next();
+        });
+      }
     }
 }
 
 // takes a string in format "DAY 00:00 - 00:00" and tranforms it into a button with id "DAY000000"
-function createAvailabilityBtn(id) {
-  var formatID = id.replace(/\s|:|-/g, "");
+// param btnClass to change the look of the button
+// param animate 1 to add animation, all other values do not add animation
+function createAvailabilityBtn(availabilityString, btnClass, animate) {
+  var formatID = availabilityString.replace(/\s|:|-/g, "");
   var param = "'" + formatID + "'";
-  var button = '<div class="btn-group animated bounceInDown"><button id="' + formatID + '" class="btn btn-danger btn-group" onclick="removeAvailability(' + param + ')" title="Click to remove">' + 
-  id +
+  var button = '<div class="btn-group';
+  if (animate == 1) {
+    button = button + ' animated bounceInDown';
+  }
+  button = button + '"><button id="' + formatID + '" class="btn btn-' + btnClass + '" onclick="removeAvailability(' + param + ')" title="Click to remove">' + 
+  availabilityString +
   '</button></div>';
   return button;
 }

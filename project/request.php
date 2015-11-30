@@ -37,13 +37,16 @@
         <!-- Main component for a primary marketing message or call to action -->
         <div class="jumbotron">
           <div>
-            <h1>Match</h1>
-            <p>Find someone to eat lunch with!</p>
+            <h1>Requests</h1>
+            <p>Accept, deny, or view requests</p>
           </div>
+        </div>
 
-          <div id="matchInput">
-            <button class="btn btn-success" onclick="match()">Match me</button>
-          </div>
+        <div class="container marketing">
+          <!-- Three columns of matches -->
+          <div class="row" id="pendingList">
+            
+          </div><!-- /.row -->
         </div>
 
         <!-- Large modal -->
@@ -54,8 +57,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h4 class="modal-title" id="gridSystemModalLabel">Availability</h4>
               </div>
-              <div class="modal-body" id="schedule">
-                
+              <div class="modal-body">
+
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
@@ -63,20 +66,7 @@
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->
         </div><!-- /.modal -->
-        
-        <div class="container marketing">
-          <!-- Three columns of matches -->
-          <div class="row" id="matchList">
-          </div><!-- /.row -->
-        </div>
-
       </div> <!-- /container -->
-
-    <!-- to be continued...
-    <div class="footer" style="text-align:center">
-      <a href="#">About</a>
-      </div>
-    </div> -->
 
     <!-- Bootstrap core JavaScript
     ================================================== -->
@@ -86,8 +76,6 @@
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <!-- <script src="../../assets/js/ie10-viewport-bug-workaround.js"></script> -->
     <script src="js/spartalunch.js"></script>
-    <!-- Session Check -->
-    <script src="js/sessionCheck.js"></script>
-    <script>window.onload=checkSession();</script>
+    <script src="js/request.js"></script>
   </body>
   </html>

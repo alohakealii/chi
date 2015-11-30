@@ -3,6 +3,23 @@ body {
   padding-bottom: 20px;
 }
 
+/* messing with footer stuff
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  margin-bottom: 20px;
+}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;=
+  height: 20px;
+  background-color: gray;
+}
+*/
+
 .navbar {
   margin-bottom: 20px;
 }
@@ -26,11 +43,42 @@ body {
     margin-top: 1%;
     margin-bottom: 1%;
   }
+
+  #requestList .btn {
+    width: 100%;
+    font-size: 1.8vw;
+  }
 }
 
-#matchElem {
-  -vendor-animation-delay: 10s;
+#schedule .row {
+  text-align: center;
+  vertical-align: middle;
 }
+
+#schedule .col-xs-6 {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#schedule .disabled {
+  color: black;
+  background-color:transparent;
+}
+
+#schedule .disabled:focus {
+  outline: none;
+}
+
+#availabilityList .btn {
+  margin-top: 4px;
+  margin-right: 4px;
+  margin-bottom: 4px;
+}
+
+#pendingList .btn {
+  margin-left: 4px;
+}
+
 
 /* MARKETING CONTENT
 -------------------------------------------------- */

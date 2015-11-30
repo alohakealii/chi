@@ -4,6 +4,13 @@
     $lastName = $_POST['lastName'];
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $email = $_POST['email'];
     $id = insertAccount($username, $password);
-    insertProfile($id, $firstName, $lastName);
+    if ($id != false) {
+     insertProfile($id, $firstName, $lastName, $email);
+     echo true;
+    }
+    else{
+    	echo false;
+    }
 ?>

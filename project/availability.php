@@ -1,6 +1,4 @@
-<?php
-  session_start();
-?>
+<?php require 'php/authenticate.php'; ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -73,7 +71,7 @@
       <div class="jumbotron">
         <div class="availability">
         <h1>Availability</h1>
-        <p>Set the times that you are free for lunch!</p>
+        <p>Set the times that you are free for lunch and then find a <a href="match.php">match!</a></p>
         </div>
 
 
