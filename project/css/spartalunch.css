@@ -24,6 +24,10 @@ body {
   margin-bottom: 20px;
 }
 
+.navbar a:hover {
+  cursor: pointer;
+}
+
 .availability {
   display: inline-block;
   width: 100%;
