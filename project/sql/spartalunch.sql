@@ -1,8 +1,8 @@
-CREATE DATABASE  IF NOT EXISTS `spartalunch` /*!40100 DEFAULT CHARACTER SET utf8 */;
-USE `spartalunch`;
+CREATE DATABASE  IF NOT EXISTS `chi` /*!40100 DEFAULT CHARACTER SET latin1 */;
+USE `chi`;
 -- MySQL dump 10.13  Distrib 5.6.24, for Win64 (x86_64)
 --
--- Host: 127.0.0.1    Database: spartalunch
+-- Host: 127.0.0.1    Database: chi
 -- ------------------------------------------------------
 -- Server version	5.6.26-log
 
@@ -18,170 +18,84 @@ USE `spartalunch`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `availability`
+-- Table structure for table `availabilities`
 --
 
-DROP TABLE IF EXISTS `availability`;
+DROP TABLE IF EXISTS `availabilities`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `availability` (
-  `userID` int(11) NOT NULL,
-  `day` varchar(45) DEFAULT '',
-  `slot` varchar(45) DEFAULT '',
-  `dayslot` varchar(45) NOT NULL,
-  PRIMARY KEY (`userID`,`dayslot`),
-  KEY `availability_userID_idx` (`userID`),
-  KEY `availability_dayslot_idx` (`dayslot`),
-  CONSTRAINT `availability_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `availabilities` (
+  `userId` int(11) NOT NULL,
+  `day` varchar(16) NOT NULL,
+  `startTime` int(11) NOT NULL,
+  `endTime` int(11) NOT NULL,
+  PRIMARY KEY (`day`,`startTime`,`endTime`,`userId`),
+  KEY `availabilities_userId_idx` (`userId`),
+  CONSTRAINT `availabilities_userId` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `availability`
+-- Dumping data for table `availabilities`
 --
 
-LOCK TABLES `availability` WRITE;
-/*!40000 ALTER TABLE `availability` DISABLE KEYS */;
-/*!40000 ALTER TABLE `availability` ENABLE KEYS */;
+LOCK TABLES `availabilities` WRITE;
+/*!40000 ALTER TABLE `availabilities` DISABLE KEYS */;
+INSERT INTO `availabilities` VALUES (1,'Monday',1,5),(1,'Tuesday',3,5),(2,'Tuesday',1,8),(2,'Wednesday',3,8),(3,'Monday',4,6),(3,'Wednesday',2,6),(4,'Thursday',3,5),(4,'Tuesday',3,5),(5,'Friday',4,8),(5,'Wednesday',2,3),(6,'Monday',7,9),(6,'Wednesday',1,3),(7,'Friday',1,3),(7,'Tuesday',5,9),(8,'Thursday',1,2),(8,'Wednesday',3,5),(9,'Thursday',1,3),(9,'Thursday',7,10),(10,'Friday',1,9),(10,'Monday',5,7),(11,'Monday',3,10),(11,'Tuesday',1,5),(12,'Tuesday',2,4),(12,'Wednesday',7,9);
+/*!40000 ALTER TABLE `availabilities` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `interest`
+-- Table structure for table `profiles`
 --
 
-DROP TABLE IF EXISTS `interest`;
+DROP TABLE IF EXISTS `profiles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `interest` (
-  `userID` int(11) NOT NULL,
-  `subject` varchar(45) NOT NULL,
-  PRIMARY KEY (`userID`,`subject`),
-  CONSTRAINT `interest` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE `profiles` (
+  `userId` int(11) NOT NULL,
+  `firstName` varchar(16) DEFAULT NULL,
+  `lastName` varchar(16) DEFAULT NULL,
+  `age` int(11) DEFAULT NULL,
+  `gender` varchar(16) DEFAULT NULL,
+  PRIMARY KEY (`userId`),
+  CONSTRAINT `profiles_userId` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `interest`
+-- Dumping data for table `profiles`
 --
 
-LOCK TABLES `interest` WRITE;
-/*!40000 ALTER TABLE `interest` DISABLE KEYS */;
-/*!40000 ALTER TABLE `interest` ENABLE KEYS */;
+LOCK TABLES `profiles` WRITE;
+/*!40000 ALTER TABLE `profiles` DISABLE KEYS */;
+INSERT INTO `profiles` VALUES (1,'Frank','Ciotto',60,'male'),(2,'Karen','Armentrout',46,'female'),(3,'Joan','Webber',24,'female'),(4,'David','Drury',55,'male'),(5,'Betty','Smith',21,'female'),(6,'Brenda','Martinelli',29,'female'),(7,'Steven','Booth',33,'male'),(8,'Lisa','Saenz',34,'female'),(9,'Joan','Webber',24,'female'),(10,'Rose','Holmes',37,'female'),(11,'Margarer','Meddars',30,'female'),(12,'Val','Curry',37,'male');
+/*!40000 ALTER TABLE `profiles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
--- Table structure for table `login`
+-- Table structure for table `users`
 --
 
-DROP TABLE IF EXISTS `login`;
+DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `login` (
-  `userID` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(45) NOT NULL,
-  `password` varchar(45) NOT NULL,
-  PRIMARY KEY (`userID`),
-  UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+CREATE TABLE `users` (
+  `userId` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(16) NOT NULL,
+  `password` varchar(16) NOT NULL,
+  PRIMARY KEY (`userId`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `login`
+-- Dumping data for table `users`
 --
 
-LOCK TABLES `login` WRITE;
-/*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (9,'mlamb','mlamb'),(10,'tcruise','tcruise'),(11,'dkong','dkong'),(12,'cbrown','crown');
-/*!40000 ALTER TABLE `login` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `notification`
---
-
-DROP TABLE IF EXISTS `notification`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `notification` (
-  `senderID` int(11) NOT NULL,
-  `receiverID` int(11) DEFAULT NULL,
-  `action` varchar(45) DEFAULT NULL,
-  `dayslot` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`senderID`),
-  KEY `notification_dayslot_idx` (`dayslot`),
-  KEY `notification_receiverID_idx` (`receiverID`),
-  CONSTRAINT `notification_dayslot` FOREIGN KEY (`dayslot`) REFERENCES `availability` (`dayslot`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `notification_receiverID` FOREIGN KEY (`receiverID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `notification_senderID` FOREIGN KEY (`senderID`) REFERENCES `login` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `notification`
---
-
-LOCK TABLES `notification` WRITE;
-/*!40000 ALTER TABLE `notification` DISABLE KEYS */;
-/*!40000 ALTER TABLE `notification` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `profile`
---
-
-DROP TABLE IF EXISTS `profile`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `profile` (
-  `userID` int(11) NOT NULL,
-  `firstName` varchar(45) DEFAULT NULL,
-  `lastName` varchar(45) DEFAULT NULL,
-  `age` varchar(45) DEFAULT NULL,
-  `gender` varchar(45) DEFAULT NULL,
-  `description` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`userID`),
-  CONSTRAINT `profile_userID` FOREIGN KEY (`userID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `profile`
---
-
-LOCK TABLES `profile` WRITE;
-/*!40000 ALTER TABLE `profile` DISABLE KEYS */;
-/*!40000 ALTER TABLE `profile` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `request`
---
-
-DROP TABLE IF EXISTS `request`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `request` (
-  `senderID` int(11) NOT NULL,
-  `receiverID` int(11) NOT NULL,
-  `dayslot` varchar(45) NOT NULL,
-  `comment` varchar(45) DEFAULT 'Pending',
-  `status` varchar(45) DEFAULT 'Pending',
-  PRIMARY KEY (`senderID`,`receiverID`,`dayslot`),
-  KEY `availability_receiverID_idx` (`receiverID`),
-  KEY `request_dayslot_idx` (`dayslot`),
-  CONSTRAINT `request_dayslot` FOREIGN KEY (`dayslot`) REFERENCES `availability` (`dayslot`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `request_receiverID` FOREIGN KEY (`receiverID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `request_senderID` FOREIGN KEY (`senderID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `request`
---
-
-LOCK TABLES `request` WRITE;
-/*!40000 ALTER TABLE `request` DISABLE KEYS */;
-/*!40000 ALTER TABLE `request` ENABLE KEYS */;
+LOCK TABLES `users` WRITE;
+/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+INSERT INTO `users` VALUES (1,'bandanagrizzled','pw'),(2,'grottystores','pw'),(3,'fibroidsforget','pw'),(4,'chinnose','pw'),(5,'woodchuckbeeping','pw'),(6,'sockplantar','pw'),(7,'hallhumanist','pw'),(8,'pufferfishbew','pw'),(9,'responsetrogle','pw'),(10,'disfiguredwatt','pw'),(11,'elitenebula','pw'),(12,'haybobbin','pw');
+/*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -193,4 +107,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-25  2:54:07
+-- Dump completed on 2015-11-30 16:52:18
