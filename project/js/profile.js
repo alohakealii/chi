@@ -1,4 +1,6 @@
 $(document).ready(function() {
+  populateProfile();
+
   $("#editProfileBtn").click(function() {
     $("#updateProfileModal").modal();
   });
@@ -11,7 +13,6 @@ $(document).ready(function() {
     $(this).parents(".dropdown").find('.btn').html($(this).text() + ' <span class="caret"></span>');
     $(this).parents(".dropdown").find('.btn').val($(this).data('value'));
   });
-
 
 });
 

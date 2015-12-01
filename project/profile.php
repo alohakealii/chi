@@ -27,7 +27,7 @@
       <![endif]-->
     </head>
 
-    <body onload="populateProfile()">
+    <body>
      <div class="container" id="profile">
       <!-- Static navbar -->
       <nav class="navbar navbar-default">
