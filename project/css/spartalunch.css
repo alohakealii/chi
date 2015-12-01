@@ -31,6 +31,14 @@ body {
   margin: 1em; */
 }
 
+.grid-item {
+  padding: 2px;
+}
+
+.jumbotron p {
+  font-size: 1.2em;
+}
+
 @media (max-width: 768px) {
   .availability {
     text-align: center;
@@ -38,10 +46,22 @@ body {
     margin-right: auto;
   }
 
+  .resize-center {
+    text-align: center;
+  }
+
   .availability .btn-group {
     width: 70%;
     margin-top: 1%;
     margin-bottom: 1%;
+  }
+
+  #availabilityList {
+    margin-left: 32px;
+  }
+
+  #availabilityList .btn-group {
+    display: inline;
   }
 
   #requestList .btn {

@@ -35,12 +35,12 @@
 
         <!-- Main component for a primary marketing message or call to action -->
         <div class="jumbotron">
-          <div>
+          <div class="resize-center">
             <h1>Match</h1>
             <p>Find someone to eat lunch with!</p>
           </div>
 
-          <div id="matchInput">
+          <div class="resize-center" id="matchInput">
             <button class="btn btn-success" onclick="match()">Match me</button>
           </div>
         </div>

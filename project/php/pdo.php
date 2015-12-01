@@ -256,6 +256,20 @@ function retrieveAvailability($userID) {
   }
 }
 
+function retrieveLocationImages() {
+  global $con;
+  $sql = "SELECT name, imgPath FROM location";
+  $q = $con -> prepare($sql);
+  $q -> execute();
+  $rows = $q -> fetchAll();
+  if (count($rows) == 0) {
+    return 0;
+  }
+  else {
+    return $rows;
+  }
+}
+
 function retrieveNotification($userID) {
   global $con;
   $sql = "SELECT notification.senderID, firstName, lastName, notification.dayslot, action

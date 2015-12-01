@@ -34,65 +34,13 @@
         </nav>
 
         <!-- Main component for a primary marketing message or call to action -->
-        <div class="jumbotron">
+        <div class="jumbotron resize-center">
           <h1>Welcome <?php echo $_SESSION["firstName"]?>!</h1>
-          <p>First, set the times that you are <a href="availability.php">available</a></p>
+          <p>First, set the times that you are <a href="availability.php">available</a> or check below for some food suggestions!</p>
         </div>
 
-        <div class="grid">
+        <div class="grid" id="grid">
           <div class="grid-sizer"></div>
-
-          <div class="grid-item">
-            <img src="images/360grill.jpg" />
-          </div>
-          <div class="grid-item">
-            <img src="images/lavictorias.jpg" />
-          </div>
-          <div class="grid-item">
-            <img src="images/brickspizzapasta.jpg" />
-          </div>
-          <div class="grid-item">
-            <img src="images/tapiocaexpress.png" />
-          </div>
-          <div class="grid-item">
-            <img src="images/inthemix.jpg" />
-          </div>
-          <div class="grid-item">
-            <img src="images/amorcafetea.jpg" />
-          </div>
-          <div class="grid-item">
-            <img src="images/jambajuice.jpg" />
-          </div>
-          <div class="grid-item">
-            <img src="images/sanpedrosquare.jpg" />
-          </div>
-          <div class="grid-item">
-            <img src="images/leboulanger.jpg" />
-          </div>
-          <div class="grid-item">
-            <img src="images/mojoburger.jpg" />
-          </div>
-          <div class="grid-item">
-            <img src="images/pandaexpress.jpg" />
-          </div>
-          <div class="grid-item">
-            <img src="images/peanuts.jpg" />
-          </div>
-          <div class="grid-item">
-            <img src="images/originalgravity.jpg" />
-          </div>
-          <div class="grid-item">
-            <img src="images/philz.png" />
-          </div>
-          <div class="grid-item">
-            <img src="images/tacobell.jpg" />
-          </div>
-          <div class="grid-item">
-            <img src="images/whispers.jpg" />
-          </div>
-          <div class="grid-item">
-            <img src="images/wafflecoop.jpg" />
-          </div>
         </div>
 
       </div> <!-- /container -->

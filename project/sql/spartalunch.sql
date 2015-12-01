@@ -26,8 +26,6 @@ DROP TABLE IF EXISTS `availability`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `availability` (
   `userID` int(11) NOT NULL,
-  `day` varchar(45) DEFAULT '',
-  `slot` varchar(45) DEFAULT '',
   `dayslot` varchar(45) NOT NULL,
   PRIMARY KEY (`userID`,`dayslot`),
   KEY `availability_userID_idx` (`userID`),
@@ -70,6 +68,31 @@ LOCK TABLES `interest` WRITE;
 UNLOCK TABLES;
 
 --
+-- Table structure for table `location`
+--
+
+DROP TABLE IF EXISTS `location`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `location` (
+  `locationID` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) DEFAULT NULL,
+  `imgPath` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`locationID`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `location`
+--
+
+LOCK TABLES `location` WRITE;
+/*!40000 ALTER TABLE `location` DISABLE KEYS */;
+INSERT INTO `location` VALUES (1,'quickly','/chi/project/images/quickly.jpg'),(2,'360 Grill','/chi/project/images/360grill.jpg'),(3,'Amor Cafe and Tea','/chi/project/images/amorcafetea.jpg'),(4,'Bricks Pizza and Pasta','/chi/project/images/brickspizzapasta.jpg'),(5,'In the Mix','/chi/project/images/inthemix.jpg'),(6,'Jamba Juice','/chi/project/images/jambajuice.jpg'),(7,'La Victoria','/chi/project/images/lavictorias.jpg'),(8,'Leboulanger','/chi/project/images/leboulanger.jpg'),(9,'Mojo Burger','/chi/project/images/mojoburger.jpg'),(10,'Original Gravity','/chi/project/images/originalgravity.jpg'),(11,'Panda Express','/chi/project/images/pandaexpress.jpg'),(12,'Peanuts','/chi/project/images/peanuts.jpg'),(13,'Philz Coffee','/chi/project/images/philz.png'),(14,'San Pedro Square','/chi/project/images/sanpedrosquare.jpg'),(15,'Taco Bell','/chi/project/images/tacobell.jpg'),(16,'Waffle Coop','/chi/project/images/wafflecoop.jpg'),(17,'Whispers','/chi/project/images/whispers.jpg');
+/*!40000 ALTER TABLE `location` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `login`
 --
 
@@ -82,7 +105,7 @@ CREATE TABLE `login` (
   `password` varchar(45) NOT NULL,
   PRIMARY KEY (`userID`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -91,6 +114,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
+INSERT INTO `login` VALUES (25,'tcruise','tcruise'),(26,'dkong','dkong'),(27,'mlamb','mlamb');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -150,6 +174,7 @@ CREATE TABLE `profile` (
 
 LOCK TABLES `profile` WRITE;
 /*!40000 ALTER TABLE `profile` DISABLE KEYS */;
+INSERT INTO `profile` VALUES (25,'Tom','Cruise','40','Male ','','tcruise@gmail.com'),(26,'Donkey','Kong',NULL,NULL,NULL,'dkong@gmail.com'),(27,'Mary','Lamb','21','Female ','I have a lamb','mlamb@gmail.com');
 /*!40000 ALTER TABLE `profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -193,4 +218,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-11-30 17:32:35
+-- Dump completed on 2015-12-01 11:25:32

@@ -35,7 +35,7 @@
 
         <!-- Main component for a primary marketing message or call to action -->
         <div class="jumbotron">
-          <div>
+          <div class="resize-center">
             <h1>Requests</h1>
             <p>Accept, deny, or view requests</p>
           </div>

@@ -33,10 +33,10 @@
       </nav>
 
       <!-- Main component for a primary marketing message or call to action -->
-      <div class="jumbotron">
+      <div class="jumbotron resize-center">
         <h1>Log in</h1>
         <p>Enter your username and password!</p>
-        <form class="form-inline">
+        <p><form class="form-inline">
           <div class="form-group">
             <label for="usernameInput">Username</label>
             <input type="text" class="form-control" id="usernameInput" placeholder="Username">
@@ -47,7 +47,8 @@
           </div>
           <button type="button" class="btn btn-success" aria-haspopup="false" aria-expanded="false" onclick="login()">
           Log in
-        </button>
+        </button></p>
+        <p>Don't have an account? <a href="register.php">Register</a></p>
         </form>
       </div>
 
