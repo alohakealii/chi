@@ -214,6 +214,17 @@ function removeAvailability($userID, $dayslot) {
   return $status;
 }
 
+function removeNotification($senderID, $receiverID, $dayslot) {
+  global $con;
+  $sql = "DELETE FROM notification WHERE senderID = :senderID AND receiverID = :userID AND dayslot = :dayslot";
+  $q = $con -> prepare($sql);
+  $q -> execute(array(':senderID' => $senderID,
+                      ':userID' => $receiverID,
+                      ':dayslot' => $dayslot));
+  $status = $q -> rowCount();
+  return $status;
+}
+
 // retrieves users who accepted requests from param $userID
 function retrieveAccepted($userID) {
   global $con;
@@ -247,7 +258,7 @@ function retrieveAvailability($userID) {
 
 function retrieveNotification($userID) {
   global $con;
-  $sql = "SELECT firstName, lastName, notification.dayslot, action
+  $sql = "SELECT notification.senderID, firstName, lastName, notification.dayslot, action
           FROM notification, profile
           WHERE notification.senderID = profile.userID AND notification.receiverID = :userID;";
   $q = $con -> prepare($sql);

@@ -14,6 +14,7 @@
     <title>spartalunch</title>
 
     <link href="css/flatly.bootstrap.min.css" rel="stylesheet">
+    <link href="css/spartalunch.css" rel="stylesheet">
     <link href="css/masonry.css" rel="stylesheet" type="text/css" >
     
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>

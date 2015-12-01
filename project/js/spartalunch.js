@@ -42,9 +42,9 @@ function login() {
       }
       
     },
-    error: function(xhr, status, error) {
-      var err = eval( xhr.responseText );
-      alert(err.Message);
+    error: function(data) {
+      alert("error");
+      //console.log(data);
     }
   });
 }

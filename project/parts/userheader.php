@@ -1,4 +1,4 @@
-<?php session_start() ?>
+<?php require "../php/authenticate.php"; ?>
 <div class="container-fluid">
   <div class="navbar-header">
       <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
@@ -17,14 +17,6 @@
       <li><a href="match.php">Match</a></li> -->
   </ul>
   <ul class="nav navbar-nav navbar-right" id="navbar-right">
-    <!-- <li class="dropdown">
-      <a href="request.php" class="dropdown-toggle" role="button" aria-haspopup="true" aria-expanded="false">
-        Requests <span class="badge" id="count">0</span>
-      </a>
-      <ul class="dropdown-menu" id="pendingList">
-      </ul>
-    </li> -->
-
     <li class="dropdown" id="notifications-dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
         Notifications <span class="badge" id="notification-count">0</span>
@@ -34,6 +26,7 @@
     </li>
 
     <li><a href="match.php">Match</a></li>
+    <li><a href="request.php">Requests</a></li>
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION["firstName"]?><span class="caret"></span></a>
       <ul class="dropdown-menu">
