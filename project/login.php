@@ -30,6 +30,7 @@
 
     <div class="container">
 
+      <!-- Static navbar -->
       <nav class="navbar navbar-default">
       </nav>
 
