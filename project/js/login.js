@@ -11,13 +11,13 @@ function login() {
         window.location = 'home.php';
       }
       else {
-        alert("error:" + data);
+        alert("Error: username and password do not match");
       }
       
     },
     error: function(xhr, status, error) {
       var err = eval( xhr.responseText );
-      alert(err.Message);
+      alert(err.Message + "TEST");
     }
   });
 }

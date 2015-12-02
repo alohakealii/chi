@@ -40,7 +40,7 @@ function login() {
         window.location = 'home.php';
       }
       else {
-        alert("error:" + data);
+        alert("Error: username and password do not match");
       }
       
     },
