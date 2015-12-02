@@ -12,7 +12,7 @@
   <title>spartalunch - Please Log In</title>
 
   <link href="css/flatly.bootstrap.min.css" rel="stylesheet">
-  <link href="css/masonry.css" rel="stylesheet" type="text/css" >
+  <link href="css/spartalunch.css" rel="stylesheet" type="text/css" >
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 
@@ -31,7 +31,7 @@
         </nav>
 
         <!-- Main component for a primary marketing message or call to action -->
-        <div class="jumbotron">
+        <div class="jumbotron resize-center">
           <h1>Oops!</h1>
           <p>That page isn't accessible. You'll first need to <a href="login.php">log in</a> to spartalunch.</p>
           <p>Don't have an account? You can <a href="register.php">register here</a>.</p>

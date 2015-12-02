@@ -44,7 +44,7 @@
             <div>
              <canvas class="header-bg" width="250" height="70" id="header-blur"></canvas>
              <div class="avatar">
-               <img id="profilePic" class="center-block"src="http://img2.wikia.nocookie.net/__cb20140321040656/ncaa-football/images/c/c0/San_Jose_State_Spartans.jpg" alt=""/>
+               <img id="profilePic" class="center-block"src="/chi/project/images/sparta.jpg" alt=""/>
              </div>
              <div class="content">
               <p id="age" class="text-center"></p>

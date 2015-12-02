@@ -201,7 +201,7 @@ textarea {
   min-height: 100%;
 }
 
-.modal-body {
+#map-modal .modal-body {
   height: 400px;
   width: auto;
 }

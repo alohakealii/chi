@@ -32,7 +32,9 @@ function populateProfile() {
       document.getElementById('firstNameChange').value = data[0]["firstName"];
       document.getElementById('lastNameChange').value = data[0]["lastName"];
       document.getElementById('ageChange').value = data[0]["age"];
-      $('#genderChange').text(data[0]["gender"]);
+      if ($('#genderChange').val() != null) { 
+        $('#genderChange').text(data[0]["gender"]);
+      }
       document.getElementById('descriptionChange').value = data[0]["description"];
     }
   });
