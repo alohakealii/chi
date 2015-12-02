@@ -40,6 +40,7 @@ CREATE TABLE `availability` (
 
 LOCK TABLES `availability` WRITE;
 /*!40000 ALTER TABLE `availability` DISABLE KEYS */;
+INSERT INTO `availability` VALUES (25,'Friday 10:30 - 11:45'),(25,'Monday 10:30 - 11:45'),(27,'Friday 10:30 - 11:45'),(27,'Monday 10:30 - 11:45'),(27,'Thursday 10:30 - 11:45'),(27,'Tuesday 10:30 - 11:45'),(27,'Wednesday 10:30 - 11:45'),(28,'Monday 10:30 - 11:45');
 /*!40000 ALTER TABLE `availability` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -88,7 +89,7 @@ CREATE TABLE `location` (
 
 LOCK TABLES `location` WRITE;
 /*!40000 ALTER TABLE `location` DISABLE KEYS */;
-INSERT INTO `location` VALUES (1,'quickly','/chi/project/images/quickly.jpg'),(2,'360 Grill','/chi/project/images/360grill.jpg'),(3,'Amor Cafe and Tea','/chi/project/images/amorcafetea.jpg'),(4,'Bricks Pizza and Pasta','/chi/project/images/brickspizzapasta.jpg'),(5,'In the Mix','/chi/project/images/inthemix.jpg'),(6,'Jamba Juice','/chi/project/images/jambajuice.jpg'),(7,'La Victoria','/chi/project/images/lavictorias.jpg'),(8,'Leboulanger','/chi/project/images/leboulanger.jpg'),(9,'Mojo Burger','/chi/project/images/mojoburger.jpg'),(10,'Original Gravity','/chi/project/images/originalgravity.jpg'),(11,'Panda Express','/chi/project/images/pandaexpress.jpg'),(12,'Peanuts','/chi/project/images/peanuts.jpg'),(13,'Philz Coffee','/chi/project/images/philz.png'),(14,'San Pedro Square','/chi/project/images/sanpedrosquare.jpg'),(15,'Taco Bell','/chi/project/images/tacobell.jpg'),(16,'Waffle Coop','/chi/project/images/wafflecoop.jpg'),(17,'Whispers','/chi/project/images/whispers.jpg');
+INSERT INTO `location` VALUES (1,'quickly','/chi/project/images/quickly.jpg'),(2,'360 Grill','/chi/project/images/360grill.jpg'),(3,'Amor Cafe and Tea','/chi/project/images/amorcafetea.jpg'),(4,'Bricks Pizza and Pasta','/chi/project/images/brickspizzapasta.jpg'),(5,'In the Mix','/chi/project/images/inthemix.jpg'),(6,'Jamba Juice','/chi/project/images/jambajuice.jpg'),(7,'La Victorias','/chi/project/images/lavictorias.jpg'),(8,'Leboulanger','/chi/project/images/leboulanger.jpg'),(9,'Mojo Burger','/chi/project/images/mojoburger.jpg'),(10,'Original Gravity','/chi/project/images/originalgravity.jpg'),(11,'Panda Express','/chi/project/images/pandaexpress.jpg'),(12,'Peanuts','/chi/project/images/peanuts.jpg'),(13,'Philz Coffee','/chi/project/images/philz.png'),(14,'San Pedro Square','/chi/project/images/sanpedrosquare.jpg'),(15,'Taco Bell','/chi/project/images/tacobell.jpg'),(16,'Waffle Coop','/chi/project/images/wafflecoop.jpg'),(17,'Whispers','/chi/project/images/whispers.jpg');
 /*!40000 ALTER TABLE `location` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -105,7 +106,7 @@ CREATE TABLE `login` (
   `password` varchar(45) NOT NULL,
   PRIMARY KEY (`userID`),
   UNIQUE KEY `username_UNIQUE` (`username`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -114,7 +115,7 @@ CREATE TABLE `login` (
 
 LOCK TABLES `login` WRITE;
 /*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES (25,'tcruise','tcruise'),(26,'dkong','dkong'),(27,'mlamb','mlamb');
+INSERT INTO `login` VALUES (25,'tcruise','tcruise'),(26,'dkong','dkong'),(27,'mlamb','mlamb'),(28,'dfirebird','dfirebird');
 /*!40000 ALTER TABLE `login` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -127,14 +128,14 @@ DROP TABLE IF EXISTS `notification`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `notification` (
   `senderID` int(11) NOT NULL,
-  `receiverID` int(11) DEFAULT NULL,
-  `action` varchar(45) DEFAULT NULL,
-  `dayslot` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`senderID`),
-  KEY `notification_dayslot_idx` (`dayslot`),
+  `receiverID` int(11) NOT NULL,
+  `action` varchar(45) NOT NULL DEFAULT '',
+  `dayslot` varchar(45) NOT NULL DEFAULT '',
+  PRIMARY KEY (`senderID`,`receiverID`,`dayslot`,`action`),
   KEY `notification_receiverID_idx` (`receiverID`),
-  CONSTRAINT `notification_dayslot` FOREIGN KEY (`dayslot`) REFERENCES `availability` (`dayslot`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `notification_receiverID` FOREIGN KEY (`receiverID`) REFERENCES `login` (`userID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  KEY `notification_dayslot_idx` (`dayslot`),
+  CONSTRAINT `notification_dayslot` FOREIGN KEY (`dayslot`) REFERENCES `availability` (`dayslot`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `notification_receiverID` FOREIGN KEY (`receiverID`) REFERENCES `login` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `notification_senderID` FOREIGN KEY (`senderID`) REFERENCES `login` (`userID`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -145,6 +146,7 @@ CREATE TABLE `notification` (
 
 LOCK TABLES `notification` WRITE;
 /*!40000 ALTER TABLE `notification` DISABLE KEYS */;
+INSERT INTO `notification` VALUES (25,28,'accepted','Monday 10:30 - 11:45');
 /*!40000 ALTER TABLE `notification` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -174,7 +176,7 @@ CREATE TABLE `profile` (
 
 LOCK TABLES `profile` WRITE;
 /*!40000 ALTER TABLE `profile` DISABLE KEYS */;
-INSERT INTO `profile` VALUES (25,'Tom','Cruise','40','Male ','','tcruise@gmail.com'),(26,'Donkey','Kong',NULL,NULL,NULL,'dkong@gmail.com'),(27,'Mary','Lamb','21','Female ','I have a lamb','mlamb@gmail.com');
+INSERT INTO `profile` VALUES (25,'Tom','Cruise','40','Male ','','tcruise@gmail.com'),(26,'Donkey','Kong',NULL,NULL,NULL,'dkong@gmail.com'),(27,'Mary','Lamb','21','Female ','I have a lamb','mlamb@gmail.com'),(28,'Dale','Firebird',NULL,NULL,'','dfirebird@gmail.com');
 /*!40000 ALTER TABLE `profile` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -206,6 +208,7 @@ CREATE TABLE `request` (
 
 LOCK TABLES `request` WRITE;
 /*!40000 ALTER TABLE `request` DISABLE KEYS */;
+INSERT INTO `request` VALUES (27,25,'Friday 10:30 - 11:45','Pending','Pending'),(28,25,'Monday 10:30 - 11:45','Pending','Cancelled');
 /*!40000 ALTER TABLE `request` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -218,4 +221,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-12-01 11:25:32
+-- Dump completed on 2015-12-01 17:21:54

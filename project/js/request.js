@@ -13,7 +13,8 @@ function acceptRequest(senderID, dayslot) {
       data: {senderID: senderID, dayslot: dayslot},
       success: function (data) {
         if (data == true) {
-          decreasePendingCount();
+          // decreasePendingCount();
+          countNotification();
           addNotification(senderID, dayslot, "accepted");
           // $('#input-' + senderID).remove();
           //$('#input-' + senderID).prepend('<p>' + getEmail(senderID) + '</p><button class="btn btn-danger" onclick="denyRequest(' + senderID + ',&quot;' + dayslot + '&quot;)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>');
@@ -49,7 +50,6 @@ function addNotification(receiverID, dayslot, action) {
     });
 }
 
-// cancel the request from the receiver's end
 function cancelRequest(senderID, dayslot) {
     var request = $('#pending-' + senderID);
     $.ajax({
@@ -68,26 +68,6 @@ function cancelRequest(senderID, dayslot) {
       }
     });
 }
-
-// cancel the request from the sender's end. example: sender sends request, receiver acccepts, sender cancels
-function cancelRequestSender(receiverID, dayslot) {
-    var request = $('#pending-' + receiverID);
-    $.ajax({
-      type: "POST",
-      url: "php/denyRequestSender.php",
-      data: {receiverID: receiverID, dayslot: dayslot},
-      success: function (data) {
-        if (data == true) {
-          addNotification(receiverID, dayslot, "cancelled");
-          request.addClass("animated fadeOutDown");
-        }
-        else {
-          alert("Error: cancel request failed");
-        }
-      }
-    });
-}
-
 
 function decreasePendingCount() {
   var count = parseInt($('#notification-count').html()) - 1;
