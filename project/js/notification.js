@@ -3,6 +3,7 @@ $(document).ready(function() {
 });
 
 function countNotification() {
+  $('#notifications').empty();
   var notifications = retrieveNotification();
   var pendingCount = $.ajax({
       type: "POST",
@@ -10,6 +11,7 @@ function countNotification() {
       async: false
       }).responseText;
   var totalCount = parseInt(pendingCount);
+
 
   if (notifications != 0) {
     totalCount = totalCount + notifications.length;
@@ -29,6 +31,7 @@ function countNotification() {
   }
   else {
     $('#notifications').empty();
+    $('#notification-count').html(totalCount);
     $('#notifications').prepend('<li><a id="request-count">Nothing here</a></li>');
   }
 }
@@ -42,8 +45,6 @@ function removeNotification(itemID, senderID, dayslot) {
       if (data == 1) {
         $('#notification-' + itemID).remove();
         countNotification();
-        var count = parseInt($('#notification-count').html()) - 1;
-        $('#notification-count').html(count);
       }
       else {
         alert("error");
