@@ -32,7 +32,7 @@ function populateProfile() {
       document.getElementById('firstNameChange').value = data[0]["firstName"];
       document.getElementById('lastNameChange').value = data[0]["lastName"];
       document.getElementById('ageChange').value = data[0]["age"];
-      if ($('#genderChange').val() != null) { 
+      if ($('#genderChange').val().length == 0) { 
         $('#genderChange').text(data[0]["gender"]);
       }
       document.getElementById('descriptionChange').value = data[0]["description"];
@@ -63,7 +63,10 @@ function updateProfile() {
         document.getElementById('age').innerHTML = age;
         document.getElementById('gender').innerHTML = gender;
         document.getElementById('description').innerHTML = description;
-
+        if (data == 1) {
+          $('#nav-name').text(firstName);
+          $('#nav-name').append('<span class="caret"></span>');
+        }
       },
       error: function(xhr, status, error) {
         var err = eval(xhr.responseText);

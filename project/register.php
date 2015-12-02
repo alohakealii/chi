@@ -17,12 +17,6 @@
 
     <!-- Custom styles for this template -->
     <link href="css/spartalunch.css" rel="stylesheet">
-
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
   </head>
 
   <body>
@@ -31,13 +25,12 @@
       <nav class="navbar navbar-default">
       </nav>
 
-      <!-- Main component for a primary marketing message or call to action -->
       <div class="jumbotron">
         <h1>Register</h1>
         <p>Sign up now to start using spartalunch!</p>
 
         <!-- Registration form -->
-        <form>
+        <form id="registration-form">
           <div class="form-group">
             <label for="firstName">First name</label>
             <input type="text" class="form-control" id="firstName" placeholder="First name">
@@ -58,7 +51,9 @@
             <label for="email">Email</label>
             <input type="text" class="form-control" id="email" placeholder="Email">
           </div>
-          <button type="button" class="btn btn-primary" onclick="register()">Submit</button>
+          <div class="form-group">
+            <button id="register-submit" type="button" class="btn btn-primary" onclick="register()">Submit</button>
+          </div>
         </form>
 
       </div>

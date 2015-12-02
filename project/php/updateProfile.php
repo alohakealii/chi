@@ -8,5 +8,8 @@ $age = $_POST['age'];
 $gender = $_POST['gender'];
 $description = $_POST['description'];
 $status = updateProfile($userID, $firstName, $lastName, $age, $gender, $description);
+if ($status == 1) {
+	$_SESSION["firstName"] = $firstName;
+}
 echo $status;
 ?>

@@ -154,7 +154,24 @@ function register() {
     var password = document.getElementById('password').value;
     var email = document.getElementById('email').value;
 
-    $.ajax({
+    var nameRE = /^[a-zA-Z]*$/;
+    var usernameRE = /^[a-zA-Z0-9]*$/;
+    var emailRE = /^[a-zA-Z0-9]*@[a-zA-Z0-9]*.com$/;
+    if (first.length == 0 ||
+        last.length == 0 ||
+        username.length == 0 ||
+        password.length == 0 ||
+        email.length == 0) {
+          alert("Please fill out all fields");
+        }
+    else if (!first.match(nameRE) || 
+          !last.match(nameRE) ||
+          !username.match(usernameRE) ||
+          !email.match(emailRE)) { 
+            alert("Invalid input(s): letters for names, letters/numbers for username, valid email format");
+          }
+    else {
+      $.ajax({
         type: "POST",
         url: "php/registerAccount.php",
         data: {firstName: first, lastName: last, username: username, password: password, email: email},
@@ -170,7 +187,10 @@ function register() {
         error: function(data) {
             alert("There was an error");
         }
-    });   
+      });   
+    }
+
+    
 }
 
 function retrieveStatus(targetID) {

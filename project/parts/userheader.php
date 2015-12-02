@@ -28,7 +28,7 @@
     <li><a href="match.php">Match</a></li>
     <li><a href="request.php">Requests</a></li>
     <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION["firstName"]?><span class="caret"></span></a>
+      <a href="#" class="dropdown-toggle" id="nav-name" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php echo $_SESSION["firstName"]?><span class="caret"></span></a>
       <ul class="dropdown-menu">
         <li><a href="availability.php">Availability</a></li>
         <li><a href="profile.php">Profile</a></li>

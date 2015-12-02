@@ -355,7 +355,7 @@ function updateProfile($userID, $firstName, $lastName, $age, $gender, $descripti
   global $con;
   $sql = "UPDATE profile SET firstName = :firstName, lastName = :lastName, age = :age, gender = :gender, description = :description WHERE userID = :userID";
   $q = $con -> prepare($sql);
-  $q -> execute(array(":userID" => $userID,
+  return $q -> execute(array(":userID" => $userID,
                       ":firstName" => $firstName,
                       ":lastName" => $lastName,
                       ":age" => $age,
