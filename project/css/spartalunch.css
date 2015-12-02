@@ -111,6 +111,10 @@ body {
   margin-left: 4px;
 }
 
+.restaurant-image:hover {
+  cursor: pointer;
+}
+
 
 /* MARKETING CONTENT
 -------------------------------------------------- */

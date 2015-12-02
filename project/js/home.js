@@ -25,7 +25,7 @@ function retrieveLocationImages() {
   var outputArr = [];
   var images = JSON.parse(response);
   for (i = 0; i < images.length; i++) {
-    var html = '<div class="grid-item"><img data-toggle="modal" data-target="#map-modal" onclick="setMapSearch(&quot;' + images[i]["name"] + '&quot;)" src="' + images[i]["imgPath"] + '"/></div>';
+    var html = '<div class="grid-item"><img class="restaurant-image" data-toggle="modal" data-target="#map-modal" onclick="setMapSearch(&quot;' + images[i]["name"] + '&quot;)" src="' + images[i]["imgPath"] + '"/></div>';
     outputArr [i] = html;
   }
   shuffle(outputArr);
