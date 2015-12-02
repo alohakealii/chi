@@ -28,7 +28,8 @@ function countNotification() {
     // $('#notification-count').addClass("animated wobble");
   }
   else {
-    $('#notifications').prepend('<li><a href="request.php" id="request-count">Nothing here</a></li>');
+    $('#notifications').empty();
+    $('#notifications').prepend('<li><a id="request-count">Nothing here</a></li>');
   }
 }
 

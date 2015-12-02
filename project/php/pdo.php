@@ -62,16 +62,16 @@ function addNotification($senderID, $receiverID, $action, $dayslot) {
                       ':dayslot' => $dayslot));
   return true;
   }
+  // catch (PDOException $e) {
+  //   $sql = "UPDATE notification SET action = :action WHERE senderID = :senderID AND receiverID = :receiverID AND dayslot = :dayslot";
+  //   $q = $con -> prepare ($sql);
+  //   $q -> execute(array(':senderID' => $senderID,
+  //                       ':receiverID' => $receiverID,
+  //                       ':action' => $action,
+  //                       ':dayslot' => $dayslot));
+  //   return true;
+  // }
   catch (PDOException $e) {
-    $sql = "UPDATE notification SET action = :action WHERE senderID = :senderID AND receiverID = :receiverID AND dayslot = :dayslot";
-    $q = $con -> prepare ($sql);
-    $q -> execute(array(':senderID' => $senderID,
-                        ':receiverID' => $receiverID,
-                        ':action' => $action,
-                        ':dayslot' => $dayslot));
-    return true;
-  }
-  catch (Exception $e) {
     return false;
   }
 }
@@ -85,6 +85,24 @@ function addRequest($userID, $targetID, $daySlot) {
                       ':targetID' => $targetID,
                       ':daySlot' => $daySlot));
   return true;
+  }
+  catch (PDOException $e) {
+    return false;
+  }
+}
+
+function cancelRequest($senderID, $receiverID, $dayslot) {
+  global $con;
+  $sql = "
+        UPDATE request
+        SET status = 'Cancelled'
+        WHERE (senderid = :senderID and receiverid = :receiverID OR (senderid = :receiverID and receiverid = :senderID)) and dayslot = :dayslot";
+  $q = $con -> prepare ($sql);
+  try {
+    $q -> execute(array(':senderID' => $senderID,
+                        ':receiverID' => $receiverID,
+                        ':dayslot' => $dayslot));
+    return true;
   }
   catch (PDOException $e) {
     return false;
@@ -132,9 +150,9 @@ function getEmail($userID) {
 function getMatch($userID) {
   global $con;
   $sql = "
-    SELECT DISTINCT firstName, lastName, profile.userID
+    SELECT DISTINCT firstName, lastName, profile.userID, profile.description
     FROM profile, availability, (SELECT * FROM availability WHERE userid = :userID) as a
-    WHERE availability.day = a.day AND availability.slot = a.slot AND availability.userid != :userID AND profile.userID = availability.userID
+    WHERE availability.dayslot = a.dayslot AND availability.userid != :userID AND profile.userID = availability.userID
   ";
   $q = $con -> prepare($sql);
   $q -> execute(array(":userID" => $userID));

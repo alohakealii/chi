@@ -34,24 +34,27 @@ function addNotification(receiverID, dayslot, action) {
   $.ajax({
       type: "POST",
       url: "php/addNotification.php",
-      data: {receiverID: receiverID, dayslot: dayslot, action: action} //,
+      data: {receiverID: receiverID, dayslot: dayslot, action: action} // ,
       // success: function (data) {
       //   if (data == true) {
+      //     console.log(receiverID + " " + dayslot);
       //     console.log("notification sent");
+      //     console.log(data);
       //   }
       //   else {
       //     alert("Error: notification failed");
+      //     console.log(data);
       //   }
       // }
     });
 }
 
-// cancel the request from the receiver'ss end
+// cancel the request from the receiver's end
 function cancelRequest(senderID, dayslot) {
     var request = $('#pending-' + senderID);
     $.ajax({
       type: "POST",
-      url: "php/denyRequest.php",
+      url: "php/cancelRequest.php",
       data: {senderID: senderID, dayslot: dayslot},
       success: function (data) {
         if (data == true) {
@@ -60,6 +63,7 @@ function cancelRequest(senderID, dayslot) {
         }
         else {
           alert("Error: cancel request failed");
+          console.log("error:" + data);
         }
       }
     });
@@ -101,6 +105,7 @@ function denyRequest(senderID, dayslot) {
       success: function (data) {
         if (data == true) {
           decreasePendingCount();
+          countNotification();
           addNotification(senderID, dayslot, "denied");
           request.addClass("animated fadeOutDown");
           // request.addClass("animated fadeOutDown").delay(250).queue(function(next) {
@@ -143,7 +148,7 @@ function retrieveAccepted() {
           '<h2>' + elem["firstName"] + ' ' + elem["lastName"] + '</h2>' +
           '<p>' + elem["dayslot"] + '</p>' +
           '<p>' + elem["email"]  + '</p>' +
-          '<button class="btn btn-danger" onclick="cancelRequestSender(' + elem["receiverID"] + ',&quot;' + elem["dayslot"] + '&quot;)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>' +
+          '<button class="btn btn-danger" onclick="cancelRequest(' + elem["receiverID"] + ',&quot;' + elem["dayslot"] + '&quot;)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>' +
           '</div>';
         htmlArr.push(html);
       }
@@ -170,6 +175,7 @@ function retrievePending() {
     }).responseText;
     if (response != 0) {
       var requests = JSON.parse(response);
+      console.log(requests);
       var htmlArr = [];
       for (i = 0; i < requests.length; i++) {
         var elem = requests[i];
@@ -182,7 +188,8 @@ function retrievePending() {
             '<button type="button" class="btn btn-danger" onclick="denyRequest(' + elem["senderID"] + ", &quot;" + elem["dayslot"] + '&quot;)">Deny <span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button></div>';
           }
           else {
-            html = html + '<p>' + elem["email"]  + '</p>';
+            html = html + '<p>' + elem["email"]  + '</p>' +
+            '<button class="btn btn-danger" onclick="cancelRequest(' + elem["senderID"] + ',&quot;' + elem["dayslot"] + '&quot;)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span></button>';
           }
           html = html + '</div>';
         htmlArr.push(html);
