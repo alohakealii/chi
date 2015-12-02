@@ -124,7 +124,7 @@ function retrieveAccepted() {
       for (i = 0; i < requests.length; i++) {
         var elem = requests[i];
         var html = '<div id="pending-' + elem["receiverID"] + '" class="col-lg-4 animated bounceIn">' +
-          '<img class="img-circle" src="data:image/gif;base64,R0lGODlhAQABAIAAAHd3dwAAACH5BAAAAAAALAAAAAABAAEAAAICRAEAOw==" alt="Generic placeholder image" width="140" height="140">' +
+          '<img class="img-circle" src="/chi/project/images/sparta.jpg" alt="Generic placeholder image" width="140" height="140">' +
           '<h2>' + elem["firstName"] + ' ' + elem["lastName"] + '</h2>' +
           '<p>' + elem["dayslot"] + '</p>' +
           '<p>' + elem["email"]  + '</p>' +
